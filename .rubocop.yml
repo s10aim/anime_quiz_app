@@ -32,3 +32,7 @@ Style/WordArray:
 
 Style/SymbolArray:
   Enabled: false
+
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'app/controllers/admins/sessions_controller.rb'
