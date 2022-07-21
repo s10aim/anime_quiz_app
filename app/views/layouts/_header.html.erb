@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to "AnimeQuiz", root_path, class: 'navbar-brand', style: "color: #501567;" %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to "アカウント編集", edit_user_registration_path, class: 'nav-link active' %>
+          <% else %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link active' %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link active' %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to "#", class: "nav-link disabled" do %>
+              <%= "【ログイン中のアドレス】#{current_user.email}" %>
+            <% end %>
+          <% elsif admin_signed_in? %>
+            <%= link_to "#", class: "nav-link disabled" do %>
+              <%= "【ログイン中のアドレス】#{current_admin.email}" %>
+            <% end %>
+          <% else %>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">▼ログアウト中</a>
+          <% end %>
+        </li>
+      </ul>
+      <div class="d-flex me-2">
+        <% if admin_signed_in? %>
+          <%= link_to "管理者ログアウト", destroy_admin_session_path, class: 'nav-link active me-2', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+        <% else %>
+          <%= link_to "管理者ログイン", new_admin_session_path, class: 'nav-link active' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
