@@ -1,0 +1,34 @@
+<div class="container mt-3">
+  <h1 class="my-4"><%= Anime.model_name.human %>作品</h1>
+  <div class="card">
+    <div class="card-body">
+      <%= simple_form_for [:admin, @anime] do |f| %>
+        <%= f.input :title %>
+        <%= f.button :submit, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="my-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col" colspan="2"><%= Anime.human_attribute_name(:title) %></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @animes.each.with_index(1) do |anime, i| %>
+          <tr>
+            <th scope="row"><%= i %></th>
+            <td colspan="2"><%= anime.title %></td>
+            <td>
+              <%= link_to "編集", edit_admin_anime_path(anime) %>
+              <%= link_to "削除", admin_anime_path(anime), data: { turbo_method: :delete, turbo_confirm: '削除しますか?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

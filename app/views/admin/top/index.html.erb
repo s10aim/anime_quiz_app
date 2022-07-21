@@ -1,2 +1,4 @@
-<h1>Admin::Top#index</h1>
-<p>Find me in app/views/admin/top/index.html.erb</p>
+<div class="container mt-3">
+  <h1 class="my-4"><%= Admin.model_name.human %>画面</h1>
+  <%= link_to "#{Anime.model_name.human}作品", admin_animes_path %>
+</div>
