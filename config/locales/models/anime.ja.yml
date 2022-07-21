@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      anime: アニメ
+    attributes:
+      anime:
+        title: タイトル
