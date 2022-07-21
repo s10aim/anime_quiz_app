@@ -12,7 +12,11 @@
 
   <body>
     <header class="mb-3">
-      <%= render "layouts/header" %>
+      <% if admin_signed_in? %>
+        <%= render "layouts/admin/header" %>
+      <% else %>
+        <%= render "layouts/header" %>
+      <% end %>
     </header>
     <%= yield %>
   </body>
