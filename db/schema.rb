@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_105926) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_22_131319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_105926) do
     t.index ["title"], name: "index_animes_on_title", unique: true
   end
 
+  create_table "quizzes", comment: "クイズ", force: :cascade do |t|
+    t.text "question", null: false, comment: "質問"
+    t.text "description", comment: "説明"
+    t.integer "status", default: 0, null: false, comment: "ステータス"
+    t.datetime "published_at", comment: "公開日時"
+    t.bigint "user_id", null: false
+    t.bigint "anime_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_quizzes_on_anime_id"
+    t.index ["user_id"], name: "index_quizzes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -45,4 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_105926) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "quizzes", "animes"
+  add_foreign_key "quizzes", "users"
 end
