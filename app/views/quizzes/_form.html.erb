@@ -1,0 +1,13 @@
+<%# required_variables: target %>
+
+<div class="container mt-3">
+  <h1 class="my-4"><%= Quiz.model_name.human %><%= target %></h1>
+  <div class="mb-4">
+    <%= simple_form_for @quiz do |f| %>
+      <p><%= f.input :anime_id, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, prompt: '選択してください' %></p>
+      <p><%= f.input :question, label: "#{Quiz.human_attribute_name(:question)}" %></p>
+      <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <%= link_to "#{Quiz.model_name.human}一覧に戻る", quizzes_path %>
+</div>

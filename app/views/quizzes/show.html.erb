@@ -1,0 +1,14 @@
+<div class="container mt-3">
+  <h1 class="my-4"><%= Quiz.model_name.human %>詳細</h1>
+  <div class="card my-4">
+    <div class="card-body">
+      <p> 【作品】<%= Anime.find(@quiz.anime_id).title %></p>
+      <p>【問題文】<%= simple_format(h(@quiz.question), class: "ms-2") %></p>
+      <% if user_signed_in? && current_user.id == @quiz.user_id %>
+        <%= link_to "編集", edit_quiz_path(@quiz) %>
+        <%= link_to "削除", quiz_path(@quiz), method: :delete, data: { confirm: "削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to "#{Quiz.model_name.human}一覧に戻る", quizzes_path %>
+</div>
