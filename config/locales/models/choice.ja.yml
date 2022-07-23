@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      choice: 選択肢
+    attributes:
+      choice:
+        body: 本文
+        is_correct: 正解の選択肢か
