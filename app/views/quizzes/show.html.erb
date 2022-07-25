@@ -4,9 +4,18 @@
     <div class="card-body">
       <p> 【作品】<%= Anime.find(@quiz.anime_id).title %></p>
       <p>【問題文】<%= simple_format(h(@quiz.question), class: "ms-2") %></p>
+      <% @quiz.choices.each do |choice| %>
+        <div class="mb-2">
+          <% if choice.is_correct == true  %>
+            <button type="button" class="btn btn-outline-primary"><%= choice.body %></button>
+          <% else %>
+            <button type="button" class="btn btn-outline-secondary"><%= choice.body %></button>
+          <% end %>
+        </div>
+      <% end %>
       <% if user_signed_in? && current_user.id == @quiz.user_id %>
         <%= link_to "編集", edit_quiz_path(@quiz) %>
-        <%= link_to "削除", quiz_path(@quiz), method: :delete, data: { confirm: "削除しますか？" } %>
+        <%= link_to "削除", quiz_path(@quiz), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
       <% end %>
     </div>
   </div>

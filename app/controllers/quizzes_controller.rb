@@ -1,6 +1,7 @@
 class QuizzesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_quiz, only: %i[edit update destroy]
+  before_action :set_anime, only: %i[create update]
 
   def index
     @quizzes = current_user.quizzes.includes(:user).order(id: :desc)
@@ -8,11 +9,16 @@ class QuizzesController < ApplicationController
 
   def new
     @quiz = Quiz.new
+    4.times { @quiz.choices.build }
   end
 
   def create
-    current_user.quizzes.create!(quiz_params)
-    redirect_to quizzes_path
+    @quiz = current_user.quizzes.new(quiz_params)
+    if @quiz.save
+      redirect_to quizzes_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -22,13 +28,16 @@ class QuizzesController < ApplicationController
   def edit; end
 
   def update
-    @quiz.update!(quiz_params)
-    redirect_to quizzes_path
+    if @quiz.update(quiz_params)
+      redirect_to quiz_path(@quiz)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @quiz.destroy!
-    redirect_to quizzes_path
+    redirect_to quizzes_path, status: :see_other
   end
 
   private
@@ -37,7 +46,12 @@ class QuizzesController < ApplicationController
     @quiz = current_user.quizzes.find(params[:id])
   end
 
+  def set_anime
+    @anime = Anime.find_by(id: params[:quiz][:anime])
+  end
+
   def quiz_params
-    params.require(:quiz).permit(:question, :anime_id)
+    params.require(:quiz).permit(:question, :description, :anime,
+                                 choices_attributes: [:id, :body, :is_correct]).merge(anime: @anime)
   end
 end

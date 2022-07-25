@@ -4,8 +4,21 @@
   <h1 class="my-4"><%= Quiz.model_name.human %><%= target %></h1>
   <div class="mb-4">
     <%= simple_form_for @quiz do |f| %>
-      <p><%= f.input :anime_id, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, prompt: '選択してください' %></p>
+      <p><%= f.input :anime, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, selected: @quiz.anime_id, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
       <p><%= f.input :question, label: "#{Quiz.human_attribute_name(:question)}" %></p>
+      <div class="mb-4">
+        <p>選択肢<span class="small ms-3" style="color: #777;">正解の選択肢どれか1つにチェック☑︎</span></p>
+        <%= f.simple_fields_for :choices do |cf| %>
+          <div class="row">
+            <div class="col-1">
+              <%= cf.input :is_correct, label: "#{Choice.human_attribute_name(:is_correct)}", as: :boolean, checked_value: true, unchecked_value: false, label: false %>
+            </div>
+            <div class="col-11">
+              <%= cf.input :body, label: false %>
+            </div>
+          </div>
+        <% end %>
+      </div>
       <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>
