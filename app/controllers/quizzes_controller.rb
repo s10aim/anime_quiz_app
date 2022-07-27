@@ -17,6 +17,9 @@ class QuizzesController < ApplicationController
     if @quiz.save
       redirect_to quizzes_path
     else
+      set_duplicate_choice_error
+      set_not_exist_correct_choice_error
+      set_exist_many_correct_choices_error
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,9 +31,12 @@ class QuizzesController < ApplicationController
   def edit; end
 
   def update
-    if @quiz.update(quiz_params)
+    if @quiz.update_with_avoiding_uniqueness_error(quiz_params)
       redirect_to quiz_path(@quiz)
     else
+      set_duplicate_choice_error
+      set_not_exist_correct_choice_error
+      set_exist_many_correct_choices_error
       render :edit, status: :unprocessable_entity
     end
   end
@@ -41,6 +47,38 @@ class QuizzesController < ApplicationController
   end
 
   private
+
+  def set_duplicate_choice_error
+    return unless @quiz.errors.key?(:choices)
+
+    duplicate_choices = @quiz.choices.group_by(&:body)
+                             .delete_if { |k, _v| k == '' }
+                             .select { |_k, v| v.size > 1 }
+
+    return if duplicate_choices.blank?
+
+    duplicate_choices.values.flatten.each do |choice|
+      choice.errors.add(:body, :duplicate)
+    end
+  end
+
+  def set_not_exist_correct_choice_error
+    return unless @quiz.errors.key?(:choices)
+    return unless @quiz.choices.map(&:is_correct).count(true).zero?
+
+    @quiz.choices.each do |choice|
+      choice.errors.add(:is_correct, :not_exist)
+    end
+  end
+
+  def set_exist_many_correct_choices_error
+    return unless @quiz.errors.key?(:choices)
+    return unless @quiz.choices.map(&:is_correct).count(true) > Quiz::CORRECT_CHOICE_LIMIT
+
+    @quiz.choices.each do |choice|
+      choice.errors.add(:is_correct, :many_exist)
+    end
+  end
 
   def set_quiz
     @quiz = current_user.quizzes.find(params[:id])

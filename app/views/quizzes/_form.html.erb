@@ -11,7 +11,7 @@
         <%= f.simple_fields_for :choices do |cf| %>
           <div class="row">
             <div class="col-1">
-              <%= cf.input :is_correct, label: "#{Choice.human_attribute_name(:is_correct)}", as: :boolean, checked_value: true, unchecked_value: false, label: false %>
+              <%= cf.input :is_correct, label: "#{Choice.human_attribute_name(:is_correct)}", as: :boolean, checked_value: 'true', unchecked_value: 'false', label: false, error: '' %>
             </div>
             <div class="col-11">
               <%= cf.input :body, label: false %>
@@ -19,6 +19,17 @@
           </div>
         <% end %>
       </div>
+      <% @quiz.errors.details[:choices].each do |choice_error| %>
+        <% if choice_error.has_value?(:not_exist) %>
+          <div class="invalid-feedback mb-5" style="display: block;">
+            ☑︎ <%= @quiz.errors.where(:choices, :not_exist).first&.full_message %>
+          </div>
+        <% elsif choice_error.has_value?(:many_exist) %>
+          <div class="invalid-feedback mb-5" style="display: block;">
+            ☑︎ <%= @quiz.errors.where(:choices, :many_exist).first&.full_message %>
+          </div>
+        <% end %>
+      <% end %>
       <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>

@@ -1,0 +1,6 @@
+ja:
+  errors:
+    messages:
+      duplicate: が重複しています
+      not_exist: を1つ選択して下さい
+      many_exist: は1つにして下さい

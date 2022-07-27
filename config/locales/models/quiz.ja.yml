@@ -8,3 +8,5 @@ ja:
         description: 説明
         status: ステータス
         published_at: 公開日
+        anime: アニメ
+        choices: 正解の選択肢
