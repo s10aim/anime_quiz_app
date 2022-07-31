@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_31_102247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
     t.index ["quiz_id"], name: "index_choices_on_quiz_id"
   end
 
+  create_table "packages", comment: "パッケージ", force: :cascade do |t|
+    t.integer "category", null: false, comment: "カテゴリー"
+    t.string "guest_id", comment: "ゲストID"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_packages_on_user_id"
+  end
+
   create_table "quizzes", comment: "クイズ", force: :cascade do |t|
     t.text "question", null: false, comment: "質問"
     t.text "description", comment: "説明"
@@ -69,6 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
   end
 
   add_foreign_key "choices", "quizzes"
+  add_foreign_key "packages", "users"
   add_foreign_key "quizzes", "animes"
   add_foreign_key "quizzes", "users"
 end
