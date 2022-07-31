@@ -4,3 +4,6 @@ ja:
       duplicate: が重複しています
       not_exist: を1つ選択して下さい
       many_exist: は1つにして下さい
+  time:
+    formats:
+      default: '%Y/%m/%d %H:%M'

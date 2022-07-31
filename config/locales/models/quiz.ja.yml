@@ -10,3 +10,8 @@ ja:
         published_at: 公開日
         anime: アニメ
         choices: 正解の選択肢
+  enums:
+    quiz:
+      status:
+        published: 公開
+        draft: 下書き

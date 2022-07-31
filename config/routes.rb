@@ -17,5 +17,9 @@ Rails.application.routes.draw do
     resources :animes, except: [:new]
   end
 
-  resources :quizzes
+  resources :quizzes do
+    collection do
+      get 'draft'
+    end
+  end
 end

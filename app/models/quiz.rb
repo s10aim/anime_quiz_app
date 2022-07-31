@@ -11,6 +11,10 @@ class Quiz < ApplicationRecord
   before_validation :choices_body_is_uniqueness
   before_validation :correct_choice_is_only_one
 
+  before_save :set_published_at
+
+  enum status: { published: 0, draft: 1 }
+
   # MEMO: 選択肢をスワップするような更新が走ると, ユニークバリデーションに引っかかってしまう
   # 事前に選択肢をデタラメに更新しておき, ユニークバリデーションエラーの発生を回避
   def update_with_avoiding_uniqueness_error(quiz_params)
@@ -44,5 +48,12 @@ class Quiz < ApplicationRecord
     elsif choices.map(&:is_correct).count(true) > CORRECT_CHOICE_LIMIT
       errors.add(:choices, :many_exist)
     end
+  end
+
+  def set_published_at
+    return if published_at.present?
+    return if draft?
+
+    update(published_at: Time.zone.now)
   end
 end

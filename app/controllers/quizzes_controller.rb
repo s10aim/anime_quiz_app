@@ -4,7 +4,7 @@ class QuizzesController < ApplicationController
   before_action :set_anime, only: %i[create update]
 
   def index
-    @quizzes = current_user.quizzes.includes(:user).order(id: :desc)
+    @quizzes = current_user.quizzes.includes(:user, :anime).published.order(id: :desc)
   end
 
   def new
@@ -15,7 +15,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = current_user.quizzes.new(quiz_params)
     if @quiz.save
-      redirect_to quizzes_path
+      redirect_to quiz_path(@quiz)
     else
       set_duplicate_choice_error
       set_not_exist_correct_choice_error
@@ -26,6 +26,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    require_login if @quiz.draft?
   end
 
   def edit; end
@@ -44,6 +45,10 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy!
     redirect_to quizzes_path, status: :see_other
+  end
+
+  def draft
+    @quizzes = current_user.quizzes.includes(:user, :anime).draft.order(id: :desc)
   end
 
   private
@@ -80,6 +85,10 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def require_login
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
   def set_quiz
     @quiz = current_user.quizzes.find(params[:id])
   end
@@ -89,7 +98,7 @@ class QuizzesController < ApplicationController
   end
 
   def quiz_params
-    params.require(:quiz).permit(:question, :description, :anime,
+    params.require(:quiz).permit(:question, :description, :status, :published_at, :anime,
                                  choices_attributes: [:id, :body, :is_correct]).merge(anime: @anime)
   end
 end
