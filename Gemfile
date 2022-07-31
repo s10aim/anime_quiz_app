@@ -39,8 +39,11 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+gem 'bootstrap5-kaminari-views'
 gem 'devise'
 gem 'devise-i18n'
+gem 'enum_help'
+gem 'kaminari'
 gem 'rails-i18n'
 gem 'simple_form'
 

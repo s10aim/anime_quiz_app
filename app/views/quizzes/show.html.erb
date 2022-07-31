@@ -1,0 +1,34 @@
+<div class="container mt-3">
+  <h1 class="my-4"><%= Quiz.model_name.human %>詳細</h1>
+  <div class="card my-4">
+    <div class="card-body">
+      <% if user_signed_in? && @quiz.published_at.present? %>
+        <p>【公開日時】<%= l @quiz.published_at %></p>
+        <% if l(@quiz.published_at) != l(@quiz.updated_at) %>
+          <p>【更新日時】<%= l @quiz.updated_at %></p>
+        <% end %>
+      <% end %>
+      <p> 【作品】<%= Anime.find(@quiz.anime_id).title %></p>
+      <p>【問題文】<%= simple_format(h(@quiz.question), class: "ms-2") %></p>
+      <p>【ステータス】<%= @quiz.status_i18n %></p>
+      <% @quiz.choices.each do |choice| %>
+        <div class="mb-2">
+          <% if choice.is_correct == true  %>
+            <button type="button" class="btn btn-outline-primary"><%= choice.body %></button>
+          <% else %>
+            <button type="button" class="btn btn-outline-secondary"><%= choice.body %></button>
+          <% end %>
+        </div>
+      <% end %>
+      <% if user_signed_in? && current_user.id == @quiz.user_id %>
+        <%= link_to "編集", edit_quiz_path(@quiz) %>
+        <%= link_to "削除", quiz_path(@quiz), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+      <% end %>
+    </div>
+  </div>
+  <% if @quiz[:status] == "draft" %>
+    <%= link_to "#{@quiz.status_i18n}一覧", draft_quizzes_path %>
+  <% else %>
+    <%= link_to "#{Quiz.model_name.human}一覧", quizzes_path %>
+  <% end %>
+</div>

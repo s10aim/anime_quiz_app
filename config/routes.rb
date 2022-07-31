@@ -16,4 +16,10 @@ Rails.application.routes.draw do
     root 'top#index'
     resources :animes, except: [:new]
   end
+
+  resources :quizzes do
+    collection do
+      get 'draft'
+    end
+  end
 end
