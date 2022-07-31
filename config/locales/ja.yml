@@ -4,6 +4,13 @@ ja:
       duplicate: が重複しています
       not_exist: を1つ選択して下さい
       many_exist: は1つにして下さい
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
   time:
     formats:
       default: '%Y/%m/%d %H:%M'

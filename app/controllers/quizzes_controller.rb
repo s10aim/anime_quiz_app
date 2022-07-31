@@ -1,10 +1,12 @@
 class QuizzesController < ApplicationController
+  PER_PAGE = 10
+
   before_action :authenticate_user!, except: [:show]
   before_action :set_quiz, only: %i[edit update destroy]
   before_action :set_anime, only: %i[create update]
 
   def index
-    @quizzes = current_user.quizzes.includes(:user, :anime).published.order(id: :desc)
+    @quizzes = current_user.quizzes.includes(:user, :anime).published.order(id: :desc).page(params[:page]).per(PER_PAGE)
   end
 
   def new
@@ -48,7 +50,7 @@ class QuizzesController < ApplicationController
   end
 
   def draft
-    @quizzes = current_user.quizzes.includes(:user, :anime).draft.order(id: :desc)
+    @quizzes = current_user.quizzes.includes(:user, :anime).draft.order(id: :desc).page(params[:page]).per(PER_PAGE)
   end
 
   private
