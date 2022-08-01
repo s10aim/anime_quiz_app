@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      quiz_package: クイズパッケージ
+    attributes:
+      quiz_package:
+        position: 表示順位

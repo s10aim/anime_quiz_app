@@ -7,6 +7,8 @@ class Quiz < ApplicationRecord
   has_many :choices, dependent: :destroy
   accepts_nested_attributes_for :choices
 
+  has_many :quiz_packages
+
   validates :question, presence: true
   before_validation :choices_body_is_uniqueness
   before_validation :correct_choice_is_only_one
