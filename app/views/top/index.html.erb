@@ -1,4 +1,8 @@
 <div class="container mt-3">
   <h1 class="my-4">Top#index</h1>
-  <%= link_to "#{Quiz.model_name.human}一覧", quizzes_path %>
+  <% if user_signed_in? %>
+    <p><%= link_to "#{Quiz.model_name.human}一覧", quizzes_path %></p>
+  <% end %>
+  <p><%= link_to "総合問題を解く", descriptions_path(category: "complete") %></p>
+  <p><%= link_to "アニメを選択して解く", descriptions_path(category: "selected") %></p>
 </div>

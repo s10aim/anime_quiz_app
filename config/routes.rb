@@ -22,4 +22,6 @@ Rails.application.routes.draw do
       get 'draft'
     end
   end
+
+  resource :descriptions, only: %i[show]
 end

@@ -1,0 +1,14 @@
+<div class="container mt-3">
+  <% if params[:category] == "complete" %>
+    <h1 class="my-5">総合問題に挑戦</h1>
+  <% end %>
+  <% if params[:category] == "selected" %>
+    <h1 class="my-5">アニメを選択してクイズに挑戦</h1>
+  <% end %>
+  <div class="card mb-5" style="height: 26rem;">
+    <div class="card-body">
+      クイズの説明
+    </div>
+  </div>
+  <%= button_to 'スタート', plays_path, { method: :post, params: { package: {category: "#{params[:category]}"}} } %>
+</div>
