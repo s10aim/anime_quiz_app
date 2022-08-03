@@ -1,0 +1,25 @@
+<div class="container mt-3">
+  <h1 class="my-4">Plays#show</h1>
+  <p>Find me in app/views/plays/show.html.erb</p>
+  <% @package.quiz_packages.each do |quiz_package| %>
+    <div class="card mb-5">
+      <div class="card-body p-5">
+        <%# TODO: 実際は表示しないので後でdivごと消す %>
+        <div class="mb-4">
+          <p>*パッケージID: <%= quiz_package.package.id %></p>
+          <% if user_signed_in? %>
+            <p>*Player ID: <%= quiz_package.package.user_id %></p>
+          <% else %>
+            <p>*Player ID: <%= quiz_package.package.guest_id %></p>
+          <% end %>
+        </div>
+        <%# /TODO %>
+        <p>Q<%= quiz_package.position %>.</p>
+        <p><%= quiz_package.quiz.question %></p>
+        <% quiz_package.quiz.choices.each do |choice| %>
+          <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2" } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   end
 
   resource :descriptions, only: %i[show]
+  resource :plays, only: %i[show create]
+  resources :quiz_packages, only: %i[update]
 end
