@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_02_080050) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_060529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_080050) do
     t.integer "quiz_score", comment: "クイズスコア"
     t.integer "ranking_score", comment: "ランキングスコア"
     t.integer "anime_list_count", comment: "アニメリストの数"
+    t.bigint "anime_id"
+    t.index ["anime_id"], name: "index_packages_on_anime_id"
     t.index ["user_id"], name: "index_packages_on_user_id"
   end
 
@@ -96,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_02_080050) do
   end
 
   add_foreign_key "choices", "quizzes"
+  add_foreign_key "packages", "animes"
   add_foreign_key "packages", "users"
   add_foreign_key "quiz_packages", "choices"
   add_foreign_key "quiz_packages", "packages"
