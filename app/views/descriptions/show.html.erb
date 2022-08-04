@@ -1,14 +1,29 @@
 <div class="container mt-3">
-  <% if params[:category] == "complete" %>
+  <% if @package.category == "complete" %>
     <h1 class="my-5">総合問題に挑戦</h1>
+    <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
+      <p><%= f.input :category, as: :hidden, input_html: { value: params[:category] } %></p>
+      <div class="card mb-5" style="height: 26rem;">
+        <div class="card-body">
+          クイズの説明
+        </div>
+      </div>
+      <%= f.button :submit, "スタート", class: "btn btn-primary" %>
+    <% end %>
   <% end %>
-  <% if params[:category] == "selected" %>
+  <% if @package.category == "selected" %>
     <h1 class="my-5">アニメを選択してクイズに挑戦</h1>
-  <% end %>
-  <div class="card mb-5" style="height: 26rem;">
-    <div class="card-body">
-      クイズの説明
+    <div class="mb-3">
+      <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
+        <p><%= f.input :anime_id, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
+        <p><%= f.input :category, as: :hidden, input_html: { value: "selected" } %></p>
+        <div class="card mb-5" style="height: 26rem;">
+          <div class="card-body">
+            クイズの説明
+          </div>
+        </div>
+        <%= f.button :submit, "スタート", class: "btn btn-primary" %>
+      <% end %>
     </div>
-  </div>
-  <%= button_to 'スタート', plays_path, { method: :post, params: { package: {category: "#{params[:category]}"}} } %>
+  <% end %>
 </div>
