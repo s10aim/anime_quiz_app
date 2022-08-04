@@ -1,0 +1,7 @@
+<%= turbo_frame_tag 'quiz_package' do %>
+  <p>Q<%= quiz_package.position %>.</p>
+  <p><%= quiz_package.quiz.question %></p>
+  <% quiz_package.quiz.choices.shuffle.each do |choice| %>
+    <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2" } %>
+  <% end %>
+<% end %>
