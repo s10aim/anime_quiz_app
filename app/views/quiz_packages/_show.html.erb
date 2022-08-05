@@ -2,6 +2,18 @@
   <p>Q<%= quiz_package.position %>.</p>
   <p><%= quiz_package.quiz.question %></p>
   <% quiz_package.quiz.choices.shuffle.each do |choice| %>
-    <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2" } %>
+    <% if choice.id == quiz_package.choice_id %>
+      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-warning" } %>
+    <% else %>
+      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary" } %>
+    <% end %>
   <% end %>
+  <div class="d-flex mt-4">
+    <% if quiz_package.position != 1 %>
+      <%= button_to '1問戻る', plays_back_path, { method: :put, params: { quiz_package: { id: quiz_package.id} }, class: 'btn btn-base btn-outline-primary me-3' } %>
+    <% end %>
+    <% if quiz_package.choice_id.present? && quiz_package.position != quiz_package.package.quiz_packages.pluck(:position).max %>
+      <%= button_to '1問進む', plays_forward_path, { method: :put, params: { quiz_package: { id: quiz_package.id} }, class: 'btn btn-base btn-outline-primary' } %>
+    <% end %>
+  </div>
 <% end %>
