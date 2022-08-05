@@ -2,10 +2,14 @@
   <p>Q<%= quiz_package.position %>.</p>
   <p><%= quiz_package.quiz.question %></p>
   <% quiz_package.quiz.choices.shuffle.each do |choice| %>
-    <% if choice.id == quiz_package.choice_id %>
-      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-warning" } %>
+    <% if quiz_package.position == quiz_package.package.quiz_packages.pluck(:position).max %>
+      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary", 'data-turbo-frame': '_top' } %>
     <% else %>
-      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary" } %>
+      <% if choice.id == quiz_package.choice_id %>
+        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-warning" } %>
+      <% else %>
+        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary" } %>
+      <% end %>
     <% end %>
   <% end %>
   <div class="d-flex mt-4">
