@@ -1,0 +1,62 @@
+<div class="container mt-3">
+  <h1 class="my-5 text-center">結果発表✨</h1>
+  <div class="card mb-5">
+    <div class="card-body p-4 p-md-5">
+      <div class="mt-4">
+        <p>【かかった時間】</p>
+        <p class="ms-3">
+          <% if @times[0] != 0 %>
+            <%= @times[0] %>分
+          <% end %>
+          <%= @times[1] %>秒
+        </p>
+        <p>【クイズのスコア】</p>
+        <p class="ms-3"><%= @package.quiz_score %> / <%= @package.quiz_packages.count %></p>
+      </div>
+      <hr class="my-5">
+      <% @package.quiz_packages.each do |quiz_package| %>
+        <div class="card mb-5">
+          <div class="card-body p-4 p-md-5">
+            <%# TODO: 実際は表示しないので後でdivごと消す %>
+            <div class="mb-4">
+              <p>*パッケージID: <%= quiz_package.package.id %></p>
+              <% if user_signed_in? %>
+                <p>*Player ID: <%= quiz_package.package.user_id %></p>
+              <% else %>
+                <p>*Player ID: <%= quiz_package.package.guest_id %></p>
+              <% end %>
+            </div>
+            <%# /TODO %>
+            <div class="d-flex">
+              <p>Q<%= quiz_package.position %>.</p>
+              <% @all_answered_quizzes = Quiz.find(quiz_package.quiz.id).quiz_packages %>
+              <% @correct_answered_quizzes = @all_answered_quizzes.map do |answered_quiz| %>
+                <% answered_quiz.choice_id == answered_quiz.quiz.choices.find_by(is_correct: true).id %>
+              <% end %>
+              <% @correct_answer_rate = (@correct_answered_quizzes.count(true).quo(@all_answered_quizzes.count).to_f.floor(3) * 100).round %>
+              <% if @correct_answer_rate.infinite? == nil %>
+                <p class="mx-4" style="color: #eb6877;">*正答率: <%= @correct_answer_rate %>%</p>
+              <% elsif @correct_answer_rate.infinite? == 1 %>
+                <p class="mx-4">*正答率: 0%</p>
+              <% end %>
+            </div>
+            <p class="mb-4"><%= quiz_package.quiz.question %></p>
+            <% quiz_package.quiz.choices.each do |choice| %>
+              <div class="d-flex flex-column my-3">
+                <% if quiz_package.choice_id == choice.id %>
+                  <button type="button" class="btn btn-outline-warning"><%= choice.body %></button>
+                <% else %>
+                  <button type="button" class="btn btn-outline-secondary"><%= choice.body %></button>
+                <% end %>
+              </div>
+            <% end %>
+            <p class="my-4">【正解の選択肢】<%= quiz_package.quiz.choices.find_by(is_correct: true).body %></p>
+          </div>
+        </div>
+      <% end %>
+      <div class="d-grid gap-2 col-6 mx-auto mb-3">
+        <%= link_to "トップ画面に戻る", root_path, class: "btn btn-outline-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

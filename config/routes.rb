@@ -31,4 +31,5 @@ Rails.application.routes.draw do
     end
   end
   resources :quiz_packages, only: %i[update]
+  resource :results, only: %i[show]
 end

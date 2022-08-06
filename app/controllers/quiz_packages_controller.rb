@@ -12,7 +12,24 @@ class QuizPackagesController < ApplicationController
 
   def last_quiz_package
     @quiz_package.package.update(finished_at: Time.zone.now)
-    redirect_to root_path
+    set_quiz_result
+    set_ranking_result
+    redirect_to results_path
+  end
+
+  def set_quiz_result
+    correct_choices = @quiz_package.package.quiz_packages.map do |quiz_package|
+      quiz_package.choice.is_correct?
+    end
+
+    quiz_score = correct_choices.count(true)
+    @quiz_package.package.update(quiz_score:)
+  end
+
+  def set_ranking_result
+    ranking_score = (@quiz_package.package.quiz_score * 1000) -
+                    (@quiz_package.package.finished_at - @quiz_package.package.start_at).to_i
+    @quiz_package.package.update(ranking_score:)
   end
 
   def set_quiz_package
