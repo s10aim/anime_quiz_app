@@ -4,6 +4,9 @@ class ResultsController < ApplicationController
   def show
     @times = (@package.finished_at - @package.start_at).to_i.divmod(60)
     @ranking = set_ranking
+    @answer_count_map = Quiz.answer_count_map
+    @correct_answer_count_map = Quiz.correct_answer_count_map
+    @correct_choice_map = Choice.correct_choice_map
   end
 
   private

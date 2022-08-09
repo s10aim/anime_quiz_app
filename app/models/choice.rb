@@ -9,4 +9,10 @@ class Choice < ApplicationRecord
   def remove_space_from_choices
     self.body = body.gsub(/[[:space:]]/, '')
   end
+
+  class << self
+    def correct_choice_map
+      where(is_correct: true).index_by(&:quiz_id)
+    end
+  end
 end

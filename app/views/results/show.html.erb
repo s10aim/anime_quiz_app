@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <h1 class="my-5 text-center">結果発表✨</h1>
+  <h1 class="my-5 text-center">結果発表</h1>
   <div class="card mb-5">
     <div class="card-body p-4 p-md-5">
       <div class="mt-4">
@@ -10,11 +10,15 @@
           <% end %>
           <%= @times[1] %>秒
         </p>
-        <p>【クイズのスコア】</p>
+        <p>【クイズの正解数】</p>
         <p class="ms-3"><%= @package.quiz_score %> / <%= @package.quiz_packages.count %></p>
+        <p>【ランキングスコア】</p>
+        <p class="ms-3"><%= @package.ranking_score %>点</p>
+        <p>【ランキング】</p>
+        <p class="ms-3"><%= @ranking %>位</p>
       </div>
       <hr class="my-5">
-      <% @package.quiz_packages.each do |quiz_package| %>
+      <% @package.quiz_packages.includes(quiz: :choices).order(position: :asc).each do |quiz_package| %>
         <div class="card mb-5">
           <div class="card-body p-4 p-md-5">
             <%# TODO: 実際は表示しないので後でdivごと消す %>
@@ -29,16 +33,14 @@
             <%# /TODO %>
             <div class="d-flex">
               <p>Q<%= quiz_package.position %>.</p>
-              <% @all_answered_quizzes = Quiz.find(quiz_package.quiz.id).quiz_packages %>
-              <% @correct_answered_quizzes = @all_answered_quizzes.map do |answered_quiz| %>
-                <% answered_quiz.choice_id == answered_quiz.quiz.choices.find_by(is_correct: true).id %>
-              <% end %>
-              <% @correct_answer_rate = (@correct_answered_quizzes.count(true).quo(@all_answered_quizzes.count).to_f.floor(3) * 100).round %>
-              <% if @correct_answer_rate.infinite? == nil %>
-                <p class="mx-4" style="color: #eb6877;">*正答率: <%= @correct_answer_rate %>%</p>
-              <% elsif @correct_answer_rate.infinite? == 1 %>
-                <p class="mx-4">*正答率: 0%</p>
-              <% end %>
+              <p class="mx-4" style="color: #eb6877;">
+                <% if @correct_answer_count_map[quiz_package.quiz_id].nil? %>
+                  *正答率: 0%
+                <% else %>
+                  *正答率: <%= (@correct_answer_count_map[quiz_package.quiz_id].quo(@answer_count_map[quiz_package.quiz_id])
+                                                                              .to_f.floor(3) * 100).round %>%
+                <% end %>
+              </p>
             </div>
             <p class="mb-4"><%= quiz_package.quiz.question %></p>
             <% quiz_package.quiz.choices.each do |choice| %>
@@ -50,7 +52,12 @@
                 <% end %>
               </div>
             <% end %>
-            <p class="my-4">【正解の選択肢】<%= quiz_package.quiz.choices.find_by(is_correct: true).body %></p>
+            <p class="my-4">【正解の選択肢】<%= @correct_choice_map[quiz_package.quiz_id].body %></p>
+            <% if quiz_package.quiz.description.present? %>
+              <div class="p-3" style="background-color: #f1f1ef;">
+                <%= quiz_package.quiz.description %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>

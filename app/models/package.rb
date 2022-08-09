@@ -3,6 +3,7 @@ class Package < ApplicationRecord
   belongs_to :anime, optional: true
 
   has_many :quiz_packages
+  has_many :quizzes, through: :quiz_packages
 
   before_validation :select_anime
 

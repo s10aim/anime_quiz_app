@@ -8,6 +8,7 @@ class Quiz < ApplicationRecord
   accepts_nested_attributes_for :choices
 
   has_many :quiz_packages
+  has_many :packages, through: :quiz_packages
 
   validates :question, presence: true
   before_validation :choices_body_is_uniqueness
@@ -30,6 +31,22 @@ class Quiz < ApplicationRecord
       raise ActiveRecord::Rollback unless success
     end
     success
+  end
+
+  class << self
+    def answer_count_map
+      joins(:quiz_packages)
+        .where.not(quiz_packages: { choice_id: nil })
+        .group("#{table_name}.id")
+        .count
+    end
+
+    def correct_answer_count_map
+      joins(quiz_packages: :choice)
+        .where(quiz_packages: { choices: { is_correct: true } })
+        .group("#{table_name}.id")
+        .count
+    end
   end
 
   private
