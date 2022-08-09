@@ -1,5 +1,5 @@
 class ResultsController < ApplicationController
-  before_action :set_package
+  before_action :fetch_package
 
   def show
     @times = (@package.finished_at - @package.start_at).to_i.divmod(60)
@@ -24,7 +24,7 @@ class ResultsController < ApplicationController
                         .index(@package.ranking_score) + 1
   end
 
-  def set_package
+  def fetch_package
     @package = if user_signed_in?
                  current_user.packages.order(created_at: :asc).last
                else
