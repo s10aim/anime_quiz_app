@@ -23,9 +23,12 @@ class DescriptionsController < ApplicationController
   def set_quizzes
     case params[:package][:category]
     when 'complete'
-      Quiz.published.sample(NUMBER_OF_QUESTIONS)
+      Quiz.published.order('RANDOM()').limit(NUMBER_OF_QUESTIONS)
     when 'selected'
-      Quiz.published.where(anime_id: params[:package][:anime_id]).sample(NUMBER_OF_QUESTIONS)
+      Quiz.published
+          .where(anime_id: params[:package][:anime_id])
+          .order('RANDOM()')
+          .limit(NUMBER_OF_QUESTIONS)
     end
   end
 
