@@ -22,4 +22,14 @@ Rails.application.routes.draw do
       get 'draft'
     end
   end
+
+  resource :descriptions, only: %i[show create]
+  resource :plays, only: %i[show] do
+    scope module: :plays do
+      resource :forward, only: %i[update]
+      resource :back, only: %i[update]
+    end
+  end
+  resources :quiz_packages, only: %i[update]
+  resource :results, only: %i[show]
 end

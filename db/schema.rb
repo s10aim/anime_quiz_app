@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_060529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
     t.index ["quiz_id"], name: "index_choices_on_quiz_id"
   end
 
+  create_table "packages", comment: "パッケージ", force: :cascade do |t|
+    t.integer "category", null: false, comment: "カテゴリー"
+    t.string "guest_id", comment: "ゲストID"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_at", precision: nil, default: -> { "now()" }, null: false, comment: "開始時刻"
+    t.datetime "finished_at", precision: nil, comment: "終了時刻"
+    t.integer "quiz_score", comment: "クイズスコア"
+    t.integer "ranking_score", comment: "ランキングスコア"
+    t.integer "anime_list_count", comment: "アニメリストの数"
+    t.bigint "anime_id"
+    t.index ["anime_id"], name: "index_packages_on_anime_id"
+    t.index ["user_id"], name: "index_packages_on_user_id"
+  end
+
+  create_table "quiz_packages", comment: "クイズパッケージ", force: :cascade do |t|
+    t.integer "position", null: false, comment: "表示順位"
+    t.bigint "quiz_id", null: false
+    t.bigint "choice_id"
+    t.bigint "package_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_quiz_packages_on_choice_id"
+    t.index ["package_id", "position"], name: "index_quiz_packages_on_package_id_and_position", unique: true
+    t.index ["package_id"], name: "index_quiz_packages_on_package_id"
+    t.index ["quiz_id"], name: "index_quiz_packages_on_quiz_id"
+  end
+
   create_table "quizzes", comment: "クイズ", force: :cascade do |t|
     t.text "question", null: false, comment: "質問"
     t.text "description", comment: "説明"
@@ -69,6 +98,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_095238) do
   end
 
   add_foreign_key "choices", "quizzes"
+  add_foreign_key "packages", "animes"
+  add_foreign_key "packages", "users"
+  add_foreign_key "quiz_packages", "choices"
+  add_foreign_key "quiz_packages", "packages"
+  add_foreign_key "quiz_packages", "quizzes"
   add_foreign_key "quizzes", "animes"
   add_foreign_key "quizzes", "users"
 end
