@@ -19,8 +19,8 @@ class ResultsController < ApplicationController
                              Package.where(anime_id: @package.anime_id)
                            end
     @categorized_package.where.not(ranking_score: nil)
+                        .order(ranking_score: :desc)
                         .pluck(:ranking_score)
-                        .sort.reverse
                         .index(@package.ranking_score) + 1
   end
 

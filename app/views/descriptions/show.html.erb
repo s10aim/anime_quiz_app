@@ -15,7 +15,12 @@
     <h1 class="my-5">アニメを選択してクイズに挑戦</h1>
     <div class="mb-3">
       <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
-        <p><%= f.input :anime_id, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
+        <p>
+          <%= f.input :anime_id, as: :select,
+                                 collection: @select_animes_collection,
+                                 prompt: '選択してください',
+                                 label: "#{Anime.model_name.human}作品" %>
+        </p>
         <p><%= f.input :category, as: :hidden, input_html: { value: "selected" } %></p>
         <div class="card mb-5" style="height: 26rem;">
           <div class="card-body">

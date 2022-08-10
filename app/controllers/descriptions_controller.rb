@@ -3,6 +3,7 @@ class DescriptionsController < ApplicationController
 
   def show
     @package = Package.new(category: params[:category])
+    @select_animes_collection = Anime.select_animes_collection
   end
 
   def create
