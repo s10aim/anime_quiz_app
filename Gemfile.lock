@@ -271,6 +271,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -337,6 +340,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   sassc-rails
+  seed-fu
   simple_form
   sprockets-rails
   stimulus-rails

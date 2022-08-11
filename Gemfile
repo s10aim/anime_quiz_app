@@ -45,6 +45,7 @@ gem 'devise-i18n'
 gem 'enum_help'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'seed-fu'
 gem 'simple_form'
 
 group :development, :test do
