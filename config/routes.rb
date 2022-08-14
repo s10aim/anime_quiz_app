@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     scope module: :rankings do
       resource :week, only: %i[show]
       resource :month, only: %i[show]
+      resource :anime, only: %i[show update]
     end
   end
 end

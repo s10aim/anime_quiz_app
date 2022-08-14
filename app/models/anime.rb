@@ -5,9 +5,17 @@ class Anime < ApplicationRecord
   validates :title, presence: true, uniqueness: true
 
   class << self
-    def select_animes_collection
+    def having_quiz_collection
       joins(:quizzes)
         .where(quizzes: { status: :published })
+        .order(id: :asc)
+        .distinct
+        .pluck(:title, :id)
+    end
+
+    def having_ranking_collection
+      joins(:packages)
+        .where.not(packages: { ranking_score: nil })
         .order(id: :asc)
         .distinct
         .pluck(:title, :id)

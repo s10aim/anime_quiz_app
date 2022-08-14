@@ -40,5 +40,23 @@ class Package < ApplicationRecord
         .ordered
         .limit(RANKING_LIMIT)
     end
+
+    def anime_ranking
+      where.not(ranking_score: nil)
+           .where.not(user_id: nil)
+           .where(category: 'selected')
+           .includes(:user, :anime)
+           .ordered
+           .limit(RANKING_LIMIT)
+    end
+
+    def selected_anime_ranking(anime_id)
+      where.not(ranking_score: nil)
+           .where.not(user_id: nil)
+           .where(anime_id:)
+           .includes(:user, :anime)
+           .ordered
+           .limit(RANKING_LIMIT)
+    end
   end
 end
