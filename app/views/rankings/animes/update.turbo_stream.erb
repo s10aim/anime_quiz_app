@@ -1,0 +1,3 @@
+<%= turbo_stream.replace 'anime_ranking' do %>
+  <%= render partial: 'table', locals: { anime_rankings: @selected_anime_rankings } %>
+<% end  %>

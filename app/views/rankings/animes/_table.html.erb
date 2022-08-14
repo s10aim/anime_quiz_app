@@ -1,0 +1,14 @@
+<%= turbo_frame_tag 'anime_ranking' do %>
+  <table class="table my-5">
+    <tbody>
+      <% anime_rankings.each.with_index(1) do |anime_ranking, i| %>
+        <tr>
+          <th scope="row col" style="width: 18%" class="align-middle ps-4 py-3"><%= i %>位</th>
+          <td class="col align-middle py-3" style="width: 45%"><%=  anime_ranking.user.nickname %></td>
+          <td class="col align-middle text-center py-3" style="width: 20%"><%= anime_ranking.ranking_score %>点</td>
+          <td class="col align-middle text-center py-3" style="width: 30%"><%= anime_ranking.anime.title %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
