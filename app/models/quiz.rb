@@ -16,7 +16,7 @@ class Quiz < ApplicationRecord
 
   before_save :set_published_at
 
-  enum status: { published: 0, draft: 1 }
+  enum status: { published: 0, draft: 1, deleted: 2 }
 
   # MEMO: 選択肢をスワップするような更新が走ると, ユニークバリデーションに引っかかってしまう
   # 事前に選択肢をデタラメに更新しておき, ユニークバリデーションエラーの発生を回避
@@ -32,6 +32,10 @@ class Quiz < ApplicationRecord
     end
     success
   end
+
+  scope :lists_of, lambda { |user, target|
+    where(user_id: user.id).where(status: target)
+  }
 
   class << self
     def answer_count_map

@@ -3,10 +3,10 @@
   <h1 class="my-4"><%= Quiz.model_name.human %><%= target %></h1>
   <div class="mb-4">
     <%= simple_form_for @quiz do |f| %>
-      <p><%= f.input :anime, as: :select, collection: Anime.all.map{ |anime| [anime.title, anime.id] }, selected: @quiz.anime_id, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
-      <p><%= f.input :question, label: "#{Quiz.human_attribute_name(:question)}" %></p>
+      <p><%= f.input :anime, as: :select, collection: Anime.pluck(:title, :id), selected: @quiz.anime_id, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
+      <p><%= f.input :question, label: "#{Quiz.human_attribute_name(:question)}", input_html: { rows: 6 } %></p>
       <p><%= f.input :published_at, as: :hidden %></p>
-      <div class="mb-4">
+      <div class="my-4">
         <p>選択肢<span class="small ms-3" style="color: #777;">正解の選択肢どれか1つにチェック☑︎</span></p>
         <%= f.simple_fields_for :choices do |cf| %>
           <div class="row">
@@ -30,15 +30,18 @@
           </div>
         <% end %>
       <% end %>
-      <div class="mb-5">
-        <%= f.input :status, as: :select, collection: Quiz.statuses_i18n.invert %>
+      <%= f.input :description, label: "説明（任意）", input_html: { rows: 6 } %>
+      <div class="my-5">
+        <%= f.input :status, as: :select, collection: Quiz.statuses_i18n.except(:deleted).invert %>
       </div>
       <%= f.button :submit, class: "btn btn-primary" %>
     <% end %>
   </div>
-  <% if request.path.match(/\/edit(\/)?/) %>
-    <%= link_to "詳細に戻る", quiz_path(@quiz) %>
-  <% elsif request.path.match(/\/new(\/)?/) %>
-    <%= link_to "#{Quiz.model_name.human}一覧に戻る", quizzes_path %>
-  <% end %>
+  <div class="mb-5">
+    <% if request.path.match(/\/edit(\/)?/) %>
+      <%= link_to "詳細に戻る", quiz_path(@quiz) %>
+    <% elsif request.path.match(/\/new(\/)?/) %>
+      <%= link_to "#{Quiz.model_name.human}一覧に戻る", quizzes_path %>
+    <% end %>
+  </div>
 </div>

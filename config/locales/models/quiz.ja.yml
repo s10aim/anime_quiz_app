@@ -15,3 +15,4 @@ ja:
       status:
         published: 公開
         draft: 下書き
+        deleted: 削除

@@ -6,7 +6,10 @@ class QuizzesController < ApplicationController
   before_action :set_anime, only: %i[create update]
 
   def index
-    @quizzes = current_user.quizzes.includes(:user, :anime).published.order(id: :desc).page(params[:page]).per(PER_PAGE)
+    @quizzes = Quiz.lists_of(current_user, 'published')
+                   .includes(:anime)
+                   .order(id: :desc)
+                   .page(params[:page]).per(PER_PAGE)
   end
 
   def new
@@ -45,12 +48,15 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    @quiz.destroy!
-    redirect_to quizzes_path, status: :see_other
+    @quiz.update!(status: 'deleted')
+    redirect_to quizzes_path, status: :see_other, notice: t('notice.destroy')
   end
 
   def draft
-    @quizzes = current_user.quizzes.includes(:user, :anime).draft.order(id: :desc).page(params[:page]).per(PER_PAGE)
+    @quizzes = Quiz.lists_of(current_user, 'draft')
+                   .includes(:anime)
+                   .order(id: :desc)
+                   .page(params[:page]).per(PER_PAGE)
   end
 
   private
