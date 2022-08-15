@@ -1,0 +1,8 @@
+ <% if flash[:notice] %>
+  <%= render "partials/bootstrap_flash_icons" %>
+  <div class="alert alert-danger alert-dismissible fade show my-3 mx-auto" style="max-width: 80%;" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24"><use xlink:href="#check-circle-fill"/></svg>
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>

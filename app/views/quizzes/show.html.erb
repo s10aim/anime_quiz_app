@@ -22,7 +22,7 @@
       <% end %>
       <% if user_signed_in? && current_user.id == @quiz.user_id %>
         <%= link_to "編集", edit_quiz_path(@quiz) %>
-        <%= link_to "削除", quiz_path(@quiz), data: { turbo_method: :delete, turbo_confirm: "削除しますか？" } %>
+        <%= link_to "非公開", quiz_path(@quiz), data: { turbo_method: :delete, turbo_confirm: "非公開にしますか？" } %>
       <% end %>
     </div>
   </div>

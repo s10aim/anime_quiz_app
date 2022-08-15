@@ -1,12 +1,15 @@
 class QuizzesController < ApplicationController
   PER_PAGE = 10
 
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_quiz, only: %i[edit update destroy]
+  before_action :authenticate_user!
+  before_action :set_quiz, only: %i[show edit update destroy]
   before_action :set_anime, only: %i[create update]
 
   def index
-    @quizzes = current_user.quizzes.includes(:user, :anime).published.order(id: :desc).page(params[:page]).per(PER_PAGE)
+    @quizzes = Quiz.lists_of(current_user, 'published')
+                   .includes(:anime)
+                   .order(id: :desc)
+                   .page(params[:page]).per(PER_PAGE)
   end
 
   def new
@@ -26,10 +29,7 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def show
-    @quiz = Quiz.find(params[:id])
-    require_login if @quiz.draft?
-  end
+  def show; end
 
   def edit; end
 
@@ -45,12 +45,15 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    @quiz.destroy!
-    redirect_to quizzes_path, status: :see_other
+    @quiz.update!(status: 'deleted')
+    redirect_to quizzes_path, status: :see_other, notice: t('notice.destroy')
   end
 
   def draft
-    @quizzes = current_user.quizzes.includes(:user, :anime).draft.order(id: :desc).page(params[:page]).per(PER_PAGE)
+    @quizzes = Quiz.lists_of(current_user, 'draft')
+                   .includes(:anime)
+                   .order(id: :desc)
+                   .page(params[:page]).per(PER_PAGE)
   end
 
   private
@@ -87,11 +90,9 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def require_login
-    redirect_to new_user_session_path unless user_signed_in?
-  end
-
   def set_quiz
+    redirect_to quizzes_path if Quiz.find(params[:id]).deleted?
+
     @quiz = current_user.quizzes.find(params[:id])
   end
 
