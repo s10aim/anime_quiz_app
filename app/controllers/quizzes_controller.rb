@@ -1,8 +1,8 @@
 class QuizzesController < ApplicationController
   PER_PAGE = 10
 
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_quiz, only: %i[edit update destroy]
+  before_action :authenticate_user!
+  before_action :set_quiz, only: %i[show edit update destroy]
   before_action :set_anime, only: %i[create update]
 
   def index
@@ -29,10 +29,7 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def show
-    @quiz = Quiz.find(params[:id])
-    require_login if @quiz.draft?
-  end
+  def show; end
 
   def edit; end
 
@@ -93,11 +90,9 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def require_login
-    redirect_to new_user_session_path unless user_signed_in?
-  end
-
   def set_quiz
+    redirect_to quizzes_path if Quiz.find(params[:id]).deleted?
+
     @quiz = current_user.quizzes.find(params[:id])
   end
 
