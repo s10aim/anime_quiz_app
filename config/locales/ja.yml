@@ -5,6 +5,8 @@ ja:
       not_exist: を1つ選択して下さい
       many_exist: は1つにして下さい
       not_selected_anime: を選択してください
+  notice:
+    destroy: 削除しました
   views:
     pagination:
       first: '&laquo; 最初'
