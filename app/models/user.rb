@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :quizzes
   has_many :packages
+  has_many :quiz_reports
 
   validates :nickname, presence: true
 end

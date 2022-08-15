@@ -10,6 +10,8 @@ class Quiz < ApplicationRecord
   has_many :quiz_packages
   has_many :packages, through: :quiz_packages
 
+  has_many :quiz_reports
+
   validates :question, presence: true
   before_validation :choices_body_is_uniqueness
   before_validation :correct_choice_is_only_one
