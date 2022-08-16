@@ -43,4 +43,6 @@ Rails.application.routes.draw do
       resource :anime, only: %i[show update]
     end
   end
+
+  resource :reports, only: %i[create]
 end

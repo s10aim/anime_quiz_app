@@ -7,6 +7,7 @@ class ResultsController < ApplicationController
     @answer_count_map = Quiz.answer_count_map
     @correct_answer_count_map = Quiz.correct_answer_count_map
     @correct_choice_map = Choice.correct_choice_map
+    @quiz_report = QuizReport.new
   end
 
   private
@@ -26,7 +27,7 @@ class ResultsController < ApplicationController
 
   def fetch_package
     @package = if user_signed_in?
-                 current_user.packages.order(created_at: :asc).last
+                 current_user.packages.where.not(finished_at: nil).order(created_at: :asc).last
                else
                  Package.order(created_at: :desc).find_by(guest_id: session[:guest_id])
                end

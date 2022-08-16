@@ -58,6 +58,10 @@
                 <%= quiz_package.quiz.description %>
               </div>
             <% end %>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#quiz-report-modal-<%= quiz_package.quiz.id %>">
+              報告
+            </button>
+            <%= render partial: "reports/modal", locals: { quiz_report: @quiz_report, quiz: quiz_package.quiz, url: reports_path } %>
           </div>
         </div>
       <% end %>

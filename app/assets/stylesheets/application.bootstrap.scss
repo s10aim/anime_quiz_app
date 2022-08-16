@@ -1,2 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.btn.btn-link:focus {
+  box-shadow: none;
+}

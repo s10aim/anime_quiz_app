@@ -7,6 +7,8 @@ ja:
       not_selected_anime: を選択してください
   notice:
     destroy: 削除しました
+    fail_to_create: 投稿に失敗しました
+    create_report: ご報告ありがとうございます
   views:
     pagination:
       first: '&laquo; 最初'

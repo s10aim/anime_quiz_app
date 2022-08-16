@@ -1,0 +1,17 @@
+<div class="modal fade" id="quiz-report-modal-<%= quiz.id %>" tabindex="-1" aria-labelledby="quiz-report-modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="quiz-report-modalLabel">クイズの違反を報告</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for quiz_report, url: url, method: :post do |f| %>
+          <%= f.input :reason, label: "#{QuizReport.human_attribute_name(:reason)}", placeholder: "例）クイズの正解が間違っている", input_html: { rows: 6 } %>
+          <%= f.input :quiz_id, as: :hidden, input_html: { value: quiz.id } %>
+          <%= f.button :submit, "送信", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
