@@ -1,3 +1,6 @@
-<%= turbo_stream.replace 'flash' do %>
-  <%= render "partials/flash" %>
+<%= turbo_stream.update 'quiz-report-modal-content' do %>
+  <div class="text-center">
+    <p class="mb-0 mt-3">ご報告ありがとうございます！</p>
+    <%= image_tag 'quiz_report.svg' %>
+  </div>
 <% end %>
