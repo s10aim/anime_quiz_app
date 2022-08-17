@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "quiz-report-modal-content" do %>
+  <%= simple_form_for @quiz_report, url: quiz_reports_path(@quiz.id), method: :post, data: { action: "turbo:submit-end->turbo_modal#submitEnd" } do |f| %>
+    <%= f.input :reason, label: "#{QuizReport.human_attribute_name(:reason)}", placeholder: "例）クイズの正解が間違っている", input_html: { rows: 6 } %>
+    <%= f.button :submit, "送信", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

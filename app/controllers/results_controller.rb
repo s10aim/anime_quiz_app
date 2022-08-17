@@ -7,7 +7,6 @@ class ResultsController < ApplicationController
     @answer_count_map = Quiz.answer_count_map
     @correct_answer_count_map = Quiz.correct_answer_count_map
     @correct_choice_map = Choice.correct_choice_map
-    @quiz_report = QuizReport.new
   end
 
   private

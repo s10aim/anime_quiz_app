@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     collection do
       get 'draft'
     end
+    scope module: :quizzes do
+      resource :reports, only: %i[new create]
+    end
   end
 
   resource :descriptions, only: %i[show create]
@@ -43,6 +46,4 @@ Rails.application.routes.draw do
       resource :anime, only: %i[show update]
     end
   end
-
-  resource :reports, only: %i[create]
 end
