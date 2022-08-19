@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_11_124824) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_15_091947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_124824) do
     t.index ["quiz_id"], name: "index_quiz_packages_on_quiz_id"
   end
 
+  create_table "quiz_reports", comment: "クイズ報告", force: :cascade do |t|
+    t.text "reason", null: false, comment: "理由"
+    t.integer "status", default: 0, null: false, comment: "ステータス"
+    t.bigint "quiz_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_quiz_reports_on_quiz_id"
+    t.index ["user_id"], name: "index_quiz_reports_on_user_id"
+  end
+
   create_table "quizzes", comment: "クイズ", force: :cascade do |t|
     t.text "question", null: false, comment: "質問"
     t.text "description", comment: "説明"
@@ -104,6 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_124824) do
   add_foreign_key "quiz_packages", "choices"
   add_foreign_key "quiz_packages", "packages"
   add_foreign_key "quiz_packages", "quizzes"
+  add_foreign_key "quiz_reports", "quizzes"
+  add_foreign_key "quiz_reports", "users"
   add_foreign_key "quizzes", "animes"
   add_foreign_key "quizzes", "users"
 end

@@ -26,7 +26,7 @@ class ResultsController < ApplicationController
 
   def fetch_package
     @package = if user_signed_in?
-                 current_user.packages.order(created_at: :asc).last
+                 current_user.packages.where.not(finished_at: nil).order(created_at: :asc).last
                else
                  Package.order(created_at: :desc).find_by(guest_id: session[:guest_id])
                end

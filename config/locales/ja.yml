@@ -7,6 +7,7 @@ ja:
       not_selected_anime: を選択してください
   notice:
     destroy: 削除しました
+    update_status: ステータスを更新しました
   views:
     pagination:
       first: '&laquo; 最初'

@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3" data-controller="turbo_modal">
   <h1 class="my-5 text-center">結果発表</h1>
   <div class="card mb-5">
     <div class="card-body p-4 p-md-5">
@@ -58,6 +58,11 @@
                 <%= quiz_package.quiz.description %>
               </div>
             <% end %>
+            <%= link_to new_quiz_reports_path(quiz_package.quiz), data: { turbo_frame: "quiz-report-modal-content", action: "click->turbo_modal#showModal" } do %>
+              <button type="button" class="btn btn-link">
+                報告
+              </button>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -66,4 +71,5 @@
       </div>
     </div>
   </div>
+  <%= render partial: "/quizzes/reports/modal" %>
 </div>

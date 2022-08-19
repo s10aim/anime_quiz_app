@@ -1,0 +1,11 @@
+<% quiz_reports.each do |quiz_report| %>
+  <p>ID:
+    <%= link_to admin_report_path(quiz_report) do %>
+      <%= quiz_report.id %>
+    <% end %>
+  </p>
+  <p>投稿者: <%= quiz_report.user.nickname %></p>
+  <p>理由: <%= quiz_report.reason %></p>
+  <p>▶︎<%= quiz_report.status_i18n %></p>
+  <hr>
+<% end %>

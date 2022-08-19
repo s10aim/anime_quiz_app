@@ -1,0 +1,74 @@
+<div class="container my-5">
+  <h1 class="my-4"><%= QuizReport.model_name.human %>管理</h1>
+  <p class="mb-5"><%= link_to "トップに戻る", admin_root_path %></p>
+  <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+      class="nav-link active"
+      id="waiting-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#waiting"
+      type="button"
+      role="tab"
+      aria-controls="waiting"
+      aria-selected="true"
+    >
+        対応待ち
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+      class="nav-link"
+      id="pending-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#pending"
+      type="button"
+      role="tab"
+      aria-controls="pending"
+      aria-selected="false"
+    >
+        保留
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+      class="nav-link"
+      id="finished-tab"
+      data-bs-toggle="tab"
+      data-bs-target="#finished"
+      type="button"
+      role="tab"
+      aria-controls="finished"
+      aria-selected="false"
+    >
+        対応済み
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+    class="tab-pane fade show active"
+    id="waiting"
+    role="tabpanel"
+    aria-labelledby="waiting-tab"
+    >
+      <%= render partial: "admin/reports/index", locals: { quiz_reports: @waiting_quiz_reports } %>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pending"
+      role="tabpanel"
+      aria-labelledby="pending-tab"
+    >
+      <%= render partial: "admin/reports/index", locals: { quiz_reports: @pending_quiz_reports } %>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="finished"
+      role="tabpanel"
+      aria-labelledby="finished-tab"
+    >
+      <%= render partial: "admin/reports/index", locals: { quiz_reports: @finished_quiz_reports } %>
+    </div>
+  </div>
+</div>

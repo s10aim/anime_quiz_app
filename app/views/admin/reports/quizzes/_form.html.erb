@@ -1,0 +1,5 @@
+<%= simple_form_for @quiz, url: admin_reports_quiz_path(@quiz) do |f| %>
+  <%= f.input :status, as: :select, collection: Quiz.statuses_i18n.invert, label: "#{Quiz.human_attribute_name(:status)}" %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
+<%= link_to "キャンセル", admin_reports_quiz_path(@quiz) %>

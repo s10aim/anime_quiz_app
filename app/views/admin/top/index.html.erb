@@ -1,4 +1,5 @@
-<div class="container mt-3">
+<div class="container mt-5">
   <h1 class="my-4"><%= Admin.model_name.human %>画面</h1>
-  <%= link_to "#{Anime.model_name.human}作品", admin_animes_path %>
+  <p><%= link_to "#{Anime.model_name.human}作品", admin_animes_path %></p>
+  <p><%= link_to "#{QuizReport.model_name.human}", admin_reports_path %></p>
 </div>

@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      quiz_report: クイズ報告
+    attributes:
+      quiz_report:
+        reason: 理由
+        status: ステータス
+  enums:
+    quiz_report:
+      status:
+        waiting: 対応待ち
+        pending: 保留
+        finished: 対応済み

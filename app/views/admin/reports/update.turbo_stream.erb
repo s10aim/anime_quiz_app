@@ -1,0 +1,6 @@
+<%= turbo_stream.update 'admin-quiz-report' do %>
+  <%= render partial: 'status', locals: { quiz_report: @quiz_report } %>
+<% end  %>
+<%= turbo_stream.replace 'flash' do %>
+  <%= render 'partials/flash' %>
+<% end  %>
