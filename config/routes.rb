@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'top#index'
     resources :animes, except: [:new]
+    resources :reports, only: %i[index show edit update]
+    namespace :reports do
+      resources :quizzes, only: %i[show edit update]
+    end
   end
 
   resources :quizzes do

@@ -1,0 +1,4 @@
+<%= turbo_frame_tag 'reported-quiz-status' do %>
+  ステータス： <%= quiz.status_i18n %>
+  <%= link_to "変更", edit_admin_reports_quiz_path(quiz) %>
+<% end %>
