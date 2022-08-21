@@ -10,6 +10,9 @@ class Quiz < ApplicationRecord
   has_many :quiz_packages
   has_many :packages, through: :quiz_packages
 
+  has_many :likes
+  has_many :liked_users, through: :likes, source: :user
+
   has_many :quiz_reports
 
   validates :question, presence: true
