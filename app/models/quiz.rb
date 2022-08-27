@@ -60,6 +60,10 @@ class Quiz < ApplicationRecord
         .group("#{table_name}.id")
         .count
     end
+
+    def liked_count_map
+      joins(:likes).group("#{table_name}.id").count
+    end
   end
 
   private

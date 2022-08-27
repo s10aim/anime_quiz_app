@@ -7,6 +7,7 @@ class ResultsController < ApplicationController
     @answer_count_map = Quiz.answer_count_map
     @correct_answer_count_map = Quiz.correct_answer_count_map
     @correct_choice_map = Choice.correct_choice_map
+    @liked_quiz_map = Quiz.liked_count_map
   end
 
   private
