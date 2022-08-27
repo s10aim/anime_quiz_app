@@ -42,6 +42,10 @@ class Quiz < ApplicationRecord
     where(user_id: user.id).where(status: target)
   }
 
+  def liked_by?(user)
+    likes.any? { |like| like.user_id == user.id }
+  end
+
   class << self
     def answer_count_map
       joins(:quiz_packages)

@@ -18,7 +18,7 @@
         <p class="ms-3"><%= @ranking %>位</p>
       </div>
       <hr class="my-5">
-      <% @package.quiz_packages.includes(quiz: :choices).order(position: :asc).each do |quiz_package| %>
+      <% @package.quiz_packages.includes(quiz: [:choices, :likes]).order(position: :asc).each do |quiz_package| %>
         <div class="card mb-5">
           <div class="card-body p-4 p-md-5">
             <%# TODO: 実際は表示しないので後でdivごと消す %>
@@ -54,12 +54,21 @@
             <% end %>
             <p class="my-4">【正解の選択肢】<%= @correct_choice_map[quiz_package.quiz_id].body %></p>
             <% if quiz_package.quiz.description.present? %>
-              <div class="p-3" style="background-color: #f1f1ef;">
+              <div class="p-3 my-4" style="background-color: #f1f1ef;">
                 <%= quiz_package.quiz.description %>
               </div>
             <% end %>
+            <div id="quiz-like-<%= quiz_package.quiz.id %>">
+              <% if quiz_package.quiz.liked_by?(current_user) %>
+                <%# 「いいね！」済み（クリックすると「いいね」解除） %>
+                <%= render partial: "likes/dislike", locals: { quiz: quiz_package.quiz } %>
+              <% else %>
+                <%# 「いいね」していない（クリックすると「いいね！」にする） %>
+                <%= render partial: "likes/like", locals: { quiz: quiz_package.quiz } %>
+              <% end %>
+            </div>
             <%= link_to new_quiz_reports_path(quiz_package.quiz), data: { turbo_frame: "quiz-report-modal-content", action: "click->turbo_modal#showModal" } do %>
-              <button type="button" class="btn btn-link">
+              <button type="button" class="btn btn-link p-0 pt-3">
                 報告
               </button>
             <% end %>
