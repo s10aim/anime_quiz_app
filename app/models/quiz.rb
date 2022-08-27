@@ -43,6 +43,8 @@ class Quiz < ApplicationRecord
   }
 
   def liked_by?(user)
+    return if user.nil?
+
     likes.any? { |like| like.user_id == user.id }
   end
 
