@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_15_091947) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_19_152747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_091947) do
     t.datetime "updated_at", null: false
     t.index ["quiz_id", "body"], name: "index_choices_on_quiz_id_and_body", unique: true
     t.index ["quiz_id"], name: "index_choices_on_quiz_id"
+  end
+
+  create_table "likes", comment: "いいね", force: :cascade do |t|
+    t.bigint "quiz_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id", "user_id"], name: "index_likes_on_quiz_id_and_user_id", unique: true
+    t.index ["quiz_id"], name: "index_likes_on_quiz_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "packages", comment: "パッケージ", force: :cascade do |t|
@@ -110,6 +120,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_091947) do
   end
 
   add_foreign_key "choices", "quizzes"
+  add_foreign_key "likes", "quizzes"
+  add_foreign_key "likes", "users"
   add_foreign_key "packages", "animes"
   add_foreign_key "packages", "users"
   add_foreign_key "quiz_packages", "choices"

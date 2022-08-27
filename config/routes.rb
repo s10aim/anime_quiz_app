@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     scope module: :quizzes do
       resource :reports, only: %i[new create]
     end
+    resource :likes, only: [:create, :destroy]
   end
 
   resource :descriptions, only: %i[show create]

@@ -8,5 +8,8 @@ class User < ApplicationRecord
   has_many :packages
   has_many :quiz_reports
 
+  has_many :likes
+  has_many :liked_quizzes, through: :likes, source: :quiz
+
   validates :nickname, presence: true
 end

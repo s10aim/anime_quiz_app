@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      like: いいね
+    attributes:
+      like:
+        quiz_id: クイズ
+        user_id: ユーザー

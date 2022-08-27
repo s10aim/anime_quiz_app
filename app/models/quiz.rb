@@ -10,6 +10,9 @@ class Quiz < ApplicationRecord
   has_many :quiz_packages
   has_many :packages, through: :quiz_packages
 
+  has_many :likes
+  has_many :liked_users, through: :likes, source: :user
+
   has_many :quiz_reports
 
   validates :question, presence: true
@@ -39,6 +42,12 @@ class Quiz < ApplicationRecord
     where(user_id: user.id).where(status: target)
   }
 
+  def liked_by?(user)
+    return if user.nil?
+
+    likes.any? { |like| like.user_id == user.id }
+  end
+
   class << self
     def answer_count_map
       joins(:quiz_packages)
@@ -52,6 +61,10 @@ class Quiz < ApplicationRecord
         .where(quiz_packages: { choices: { is_correct: true } })
         .group("#{table_name}.id")
         .count
+    end
+
+    def liked_count_map
+      joins(:likes).group("#{table_name}.id").count
     end
   end
 

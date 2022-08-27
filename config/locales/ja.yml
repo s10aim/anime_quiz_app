@@ -5,6 +5,7 @@ ja:
       not_exist: を1つ選択して下さい
       many_exist: は1つにして下さい
       not_selected_anime: を選択してください
+      too_many_likes: は同じ投稿に2回以上いいねはできません
   notice:
     destroy: 削除しました
     update_status: ステータスを更新しました
