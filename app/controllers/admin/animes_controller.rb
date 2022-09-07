@@ -7,15 +7,24 @@ class Admin::AnimesController < Admin::AdminController
   end
 
   def create
-    Anime.create!(anime_params)
-    redirect_to admin_animes_path
+    @anime = Anime.new(anime_params)
+
+    if @anime.save
+      redirect_to admin_animes_path
+    else
+      @animes = Anime.order(id: :asc)
+      render :index, status: :unprocessable_entity
+    end
   end
 
   def edit; end
 
   def update
-    @anime.update!(anime_params)
-    redirect_to admin_animes_path
+    if @anime.update(anime_params)
+      redirect_to admin_animes_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
