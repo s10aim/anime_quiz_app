@@ -2,25 +2,34 @@ class Admin::AnimesController < Admin::AdminController
   before_action :set_anime, only: %i[edit update destroy]
 
   def index
-    @animes = Anime.order(id: :asc)
+    @animes = Anime.published.order(id: :asc)
     @anime = Anime.new
   end
 
   def create
-    Anime.create!(anime_params)
-    redirect_to admin_animes_path
+    @anime = Anime.new(anime_params)
+
+    if @anime.save
+      redirect_to admin_animes_path
+    else
+      @animes = Anime.order(id: :asc)
+      render :index, status: :unprocessable_entity
+    end
   end
 
   def edit; end
 
   def update
-    @anime.update!(anime_params)
-    redirect_to admin_animes_path
+    if @anime.update(anime_params)
+      redirect_to admin_animes_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @anime.destroy!
-    redirect_to admin_animes_path
+    @anime.update!(status: 'deleted')
+    redirect_to admin_animes_path, status: :see_other, notice: t('notice.destroy')
   end
 
   private
