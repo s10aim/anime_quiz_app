@@ -2,7 +2,7 @@ class Admin::AnimesController < Admin::AdminController
   before_action :set_anime, only: %i[edit update destroy]
 
   def index
-    @animes = Anime.order(id: :asc)
+    @animes = Anime.published.order(id: :asc)
     @anime = Anime.new
   end
 
@@ -28,8 +28,8 @@ class Admin::AnimesController < Admin::AdminController
   end
 
   def destroy
-    @anime.destroy!
-    redirect_to admin_animes_path
+    @anime.update!(status: 'deleted')
+    redirect_to admin_animes_path, status: :see_other, notice: t('notice.destroy')
   end
 
   private

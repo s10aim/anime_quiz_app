@@ -4,6 +4,8 @@ class Anime < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
 
+  enum status: { published: 0, deleted: 1 }
+
   class << self
     def having_quiz_collection
       joins(:quizzes)
