@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
+  resource :home, controller: :home, only: %i[show]
+
   namespace :admin do
     root 'top#index'
     resources :animes, except: [:new]
