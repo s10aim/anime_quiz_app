@@ -1,6 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import './header';
+@import './footer';
 
 /* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
@@ -19,8 +20,21 @@
 }
 
 body {
+  display: flex;
   color: #5e5e5e;
   font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+.main-wrapper {
+  position: relative;
+  flex: 1;
+  margin-bottom: 65px;
 }
 
 a {
