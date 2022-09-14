@@ -2,6 +2,8 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import './header';
 @import './footer';
+@import './btn';
+@import './form';
 
 /* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
@@ -37,14 +39,15 @@ html {
   margin-bottom: 65px;
 }
 
+h1 {
+  text-align: center;
+  padding: 1em 0;
+}
+
 a {
   text-decoration: none;
 }
 
 ul {
   list-style-type: none;
-}
-
-.btn.btn-link:focus {
-  box-shadow: none;
 }

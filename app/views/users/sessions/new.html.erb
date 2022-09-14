@@ -1,31 +1,27 @@
-<div class="container-fluid mt-5" style="max-width: 600px;">
-  <div class="card p-5 my-5">
-    <div class="card-body">
-      <h1 class="text-center mb-4"><%= t('.sign_in') %></h1>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-group mb-3">
-          <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
-        </div>
-        <div class="form-group mb-3">
-          <%= f.label :password %>
-          <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
-        </div>
-        <% if devise_mapping.rememberable? %>
-          <div class="form-group form-check">
-            <%= f.check_box :remember_me, class: 'form-check-input' %>
-            <%= f.label :remember_me, class: 'form-check-label' do %>
-              <%= resource.class.human_attribute_name('remember_me') %>
-            <% end %>
-          </div>
-        <% end %>
-        <div class="form-group d-grid gap-2 col-6 mx-auto mt-5 mb-4">
-          <%= f.submit  t('.sign_in'), class: 'btn btn-primary' %>
+<div class="container-fluid mt-5">
+  <div class="form-wrapper pb-4">
+    <h1>Sign In</h1>
+    <%= simple_form_for resource, url: session_path(resource_name), data: { turbo: false } do |f| %>
+      <div class="form-item">
+        <%= f.input :email, autofocus: true, autocomplete: 'email' %>
+      </div>
+      <div class="form-item">
+        <%= f.input :password, autocomplete: 'current-password' %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="form-group form-check">
+          <%= f.check_box :remember_me, class: 'form-check-input' %>
+          <%= f.label :remember_me, class: 'form-check-label' do %>
+            <%= resource.class.human_attribute_name('remember_me') %>
+          <% end %>
         </div>
       <% end %>
-      <div class="text-center">
-        <%= render 'devise/shared/links' %>
+      <div class="button-panel">
+        <%= f.submit  t('.sign_in'), class: 'button' %>
       </div>
+    <% end %>
+    <div class="form-footer">
+      <%= render 'devise/shared/links' %>
     </div>
   </div>
 </div>
