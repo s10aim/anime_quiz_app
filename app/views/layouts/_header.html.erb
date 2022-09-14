@@ -16,7 +16,7 @@
       </li>
       <li class="nav-item me-3">
         <% if user_signed_in? %>
-          <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+          <%= button_to "ログアウト", destroy_user_session_path, class: 'nav-link active', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } %>
         <% else %>
           <%= link_to "ログイン", new_user_session_path, class: 'nav-link active header-btn header-btn-pink' %>
         <% end %>
@@ -60,7 +60,7 @@
         </li>
         <li class="nav-item">
           <% if user_signed_in? %>
-            <%= link_to destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } do %>
+            <%= button_to destroy_user_session_path, class: 'nav-link active logout-hamburger', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } do %>
               <i class="bi bi-box-arrow-in-left me-2"></i>ログアウト
             <% end %>
           <% else %>
