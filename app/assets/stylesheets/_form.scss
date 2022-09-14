@@ -1,0 +1,69 @@
+form {
+  padding: 1rem 1.5em;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
+}
+
+// ログイン関連
+.form-wrapper {
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 450px;
+  border: 1px solid #5e5e5e;
+  border-radius: 10px;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input {
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+
+  &:focus {
+    border-bottom: 2px solid #c0c0c0;
+    outline: none;
+  }
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-bottom: 1px dotted #8c8c8c;
+  }
+}
+
+.form-control {
+  &#user_nickname,
+  &#user_email,
+  &.password {
+    border-radius: 0%;
+
+    &:focus {
+      box-shadow: 0 0 0 1000px white inset;
+    }
+  }
+}

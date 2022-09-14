@@ -1,11 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <%= link_to "AnimeQuiz", root_path, class: 'navbar-brand ms-3 me-4', style: "color: #501567;" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<div class="container-fluid">
+  <%= link_to image_tag("aniaq_logo.png", class:"header-logo"), root_path %>
+  <div class="d-none d-md-flex">
+    <ul class="d-flex flex-row p-0 m-0">
+      <li class="nav-item me-4">
+        <% if user_signed_in? %>
+          <%= link_to "アカウント編集", edit_user_registration_path, class: 'nav-link active' %>
+        <% else %>
+          <%= link_to "新規登録", new_user_registration_path, class: 'nav-link active header-btn header-btn-white' %>
+        <% end %>
+      </li>
+      <li class="nav-item me-3">
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path, class: 'nav-link active header-btn header-btn-pink' %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <div class="hamburger-menu d-md-none">
+    <input type="checkbox" id="menu-btn-check">
+    <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    <div class="menu-content">
+      <div class="menu-content-card">
+        <div class="card mb-3">
+          <%= link_to descriptions_path(category: "complete"), class: 'card-body' do %>
+            <%= image_tag 'complete-anime.png', size: '35x35' %>
+            総合問題で遊ぶ
+          <% end %>
+        </div>
+        <div class="card">
+          <%= link_to descriptions_path(category: "selected"), class: 'card-body' do %>
+            <%= image_tag 'specific-anime.png', size: '35x35' %>
+            作品を選択して遊ぶ
+          <% end %>
+        </div>
+      </div>
+      <ul>
         <li class="nav-item">
           <% if user_signed_in? %>
             <%= link_to "アカウント編集", edit_user_registration_path, class: 'nav-link active' %>
@@ -20,21 +51,7 @@
             <%= link_to "ログイン", new_user_session_path, class: 'nav-link active' %>
           <% end %>
         </li>
-        <li class="nav-item">
-          <% if user_signed_in? %>
-            <%= link_to "#", class: "nav-link disabled" do %>
-              <%= "【ログイン中のアドレス】#{current_user.email}" %>
-            <% end %>
-          <% else %>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">▼ログアウト中</a>
-          <% end %>
-        </li>
       </ul>
-      <div class="d-flex me-2">
-        <% unless user_signed_in? %>
-          <%= link_to "管理者ログイン", new_admin_session_path, class: 'nav-link active' %>
-        <% end %>
-      </div>
     </div>
   </div>
-</nav>
+</div>

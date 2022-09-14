@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AnimeQuizApp</title>
+    <title>ANIAQ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag('favicon.png') %>
   </head>
   <body>
-    <header class="mb-3">
+    <header class="navbar header shadow-sm">
       <%= render "layouts/header" %>
     </header>
     <%= render "partials/flash" %>
-    <%= yield %>
+    <div class="main-wrapper">
+      <%= yield %>
+    </div>
+    <footer>
+      <%= render "layouts/footer" %>
+    </footer>
   </body>
 </html>
