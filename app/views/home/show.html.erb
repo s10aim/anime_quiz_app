@@ -1,5 +1,24 @@
-<div class="container mt-3">
-  <h1>Home#show</h1>
+<div class="container">
+  <div class="top-container">
+    <div>
+      <%= image_tag 'aniaq_logo2.png', class: 'aniaq_logo2' %>
+    </div>
+    <div class="player-info mt-5">
+      <p class="player-info-label">クイズで遊んだ回数</p>
+      <p class="player-info-content"><%= Package.where(user_id: current_user.id).count %>回</p>
+      <p class="player-info-label">現在の最高ランキング</p>
+      <p class="player-info-label">*総合問題</p>
+      <p class="player-info-content border-0 mb-0"><%= @complete_best_ranking %>位</p>
+      <p class="player-info-label">*アニメ選択問題</p>
+      <p class="player-info-content"><%= @selected_best_ranking %>位</p>
+      <p class="player-info-label">作成したクイズ</p>
+      <p class="player-info-content"><%= current_user.quizzes.count %>問</p>
+      <p class="player-info-label">獲得いいね数</p>
+      <p class="player-info-content m-0">
+        <%= Quiz.joins(:likes).where(user_id: current_user.id).count %><i class="bi bi-hand-thumbs-up ms-1"></i>
+      </p>
+    </div>
+  </div>
   <p><%= link_to "#{Quiz.model_name.human}一覧", quizzes_path %></p>
   <p><%= link_to "総合問題を解く", descriptions_path(category: "complete") %></p>
   <p><%= link_to "アニメを選択して解く", descriptions_path(category: "selected") %></p>

@@ -27,6 +27,23 @@ class Package < ApplicationRecord
   scope :ordered, -> { order(ranking_score: :desc, finished_at: :asc) }
 
   class << self
+    def complete_best_ranking(user)
+      ranking = ranking_of(Date.parse('2022/07/01')..Time.zone.now)
+                .order(ranking_score: :desc, finished_at: :asc).index do |package|
+        package.user_id == user.id
+      end
+
+      ranking.nil? ? nil : ranking + 1
+    end
+
+    def selected_best_ranking(user)
+      ranking = anime_ranking.index do |package|
+        package.user_id == user.id
+      end
+
+      ranking.nil? ? nil : ranking + 1
+    end
+
     def week_ranking
       ranking_of(Time.zone.now.all_week)
         .includes(:user)
@@ -47,7 +64,6 @@ class Package < ApplicationRecord
            .where(category: 'selected')
            .includes(:user, :anime)
            .ordered
-           .limit(RANKING_LIMIT)
     end
 
     def selected_anime_ranking(anime_id)

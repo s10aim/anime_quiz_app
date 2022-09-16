@@ -1,0 +1,38 @@
+.top-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+}
+
+.aniaq_logo2 {
+  width: 400px;
+  height: 360px;
+}
+
+.player-info {
+  margin-left: 36px;
+
+  &-label {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  &-content {
+    color: black;
+    font-size: 20px;
+    width: 240px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin: 0 auto;
+  }
+}
