@@ -6,7 +6,7 @@
     <div class="player-info mt-5">
       <p class="player-info-label">クイズで遊んだ回数</p>
       <p class="player-info-content"><%= Package.where(user_id: current_user.id).count %>回</p>
-      <p class="player-info-label">現在の最高ランキング</p>
+      <p class="player-info-label">現在のランキング</p>
       <p class="player-info-label">*総合問題</p>
       <p class="player-info-content border-0 mb-0"><%= @complete_best_ranking %>位</p>
       <p class="player-info-label">*アニメ選択問題</p>
@@ -19,8 +19,24 @@
       </p>
     </div>
   </div>
-  <p><%= link_to "#{Quiz.model_name.human}一覧", quizzes_path %></p>
-  <p><%= link_to "総合問題を解く", descriptions_path(category: "complete") %></p>
-  <p><%= link_to "アニメを選択して解く", descriptions_path(category: "selected") %></p>
-  <p><%= link_to "ランキング", rankings_path %></p>
+  <div class="home-content">
+    <%= link_to new_quiz_path, class: "btn-home-content btn-home-content-border" do %>
+      <span>
+        <%= image_tag 'create_quiz.svg', size: '80x80' %>
+        <p class="text-center m-0">クイズを作る</p>
+      </span>
+    <% end %>
+    <%= link_to new_quiz_path, class: "btn-home-content btn-home-content-border" do %>
+      <span>
+        <%= image_tag 'quiz_report.svg', size: '80x80' %>
+        <p class="text-center m-0">クイズで遊ぶ</p>
+      </span>
+    <% end %>
+    <%= link_to rankings_path, class: "btn-home-content btn-home-content-border" do %>
+      <span class="home-ranking-text">
+        <%= image_tag 'ranking.svg', size: '80x80' %>
+        <p class="text-center m-0">ランキング</p>
+      </span>
+    <% end %>
+  </div>
 </div>
