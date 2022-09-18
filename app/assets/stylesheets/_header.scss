@@ -164,6 +164,17 @@
   left: 0; /*メニューを画面内へ*/
 }
 
+.mobile-home-icon {
+  display: inline-block;
+  margin-right: 24px;
+  font-size: 25px;
+  color: #db5876;
+
+  @include media-breakpoint-down(sm) {
+    margin-right: 20px;
+  }
+}
+
 // ログアウト
 .nav-item {
   button {

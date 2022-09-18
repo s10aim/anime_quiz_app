@@ -25,7 +25,14 @@
   </div>
   <div class="hamburger-menu d-md-none">
     <input type="checkbox" id="menu-btn-check">
-    <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    <div class="d-flex align-items-center">
+      <% if user_signed_in? %>
+        <%= link_to home_path do %>
+          <div class="mobile-home-icon"><i class="bi bi-house-fill"></i></div>
+        <% end %>
+      <% end %>
+      <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    </div>
     <div class="menu-content">
       <div class="menu-content-card">
         <div class="card mb-3">
