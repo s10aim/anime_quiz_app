@@ -1,0 +1,195 @@
+.top-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+}
+
+.aniaq_logo2 {
+  width: 400px;
+  height: 360px;
+
+  @include media-breakpoint-down(md) {
+    width: 375px;
+    height: 337px;
+  }
+}
+
+.player-info {
+  margin-left: 36px;
+
+  &-label {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  &-content {
+    color: black;
+    font-size: 20px;
+    width: 240px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin: 0 auto;
+  }
+}
+
+.home-content {
+  display: flex;
+  max-width: 1000px;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 100px;
+
+  @media screen and (min-width: 992px) and (max-width: 1023px) {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    margin-top: 75px;
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+
+  @media screen and (max-width: 466px) {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+.btn-home-content,
+button.btn-home-content {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+
+  @media screen and (min-width: 992px) and (max-width: 1023px) {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    font-size: 1rem;
+  }
+
+  @include media-breakpoint-down(md) {
+    font-size: 1.4rem;
+  }
+
+  @media screen and (min-width: 400px) and (max-width: 416px) {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 399px) {
+    font-size: 1rem;
+  }
+}
+
+.btn-home-content-border {
+  margin-bottom: 12px;
+  padding: 10px;
+
+  -webkit-transition: all 0.3s;
+
+  transition: all 0.3s;
+
+  border: 2px solid #000;
+  background: -webkit-radial-gradient(#000 15%, rgba(0, 0, 0, 0) 16%),
+    -webkit-radial-gradient(#000 15%, rgba(0, 0, 0, 0) 16%), #f0a3b3;
+  background: radial-gradient(#000 15%, rgba(0, 0, 0, 0) 16%), radial-gradient(#000 15%, rgba(0, 0, 0, 0) 16%), #f0a3b3;
+  background-position: 0 0, 6px 6px;
+  background-clip: border-box;
+  background-origin: padding-box;
+  background-size: 12px 12px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 48px;
+  }
+}
+
+.btn-home-content-border span {
+  position: relative;
+
+  display: block;
+
+  padding: 1.25rem 3rem;
+
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  background: #fff;
+
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    padding: 20px 36px;
+  }
+
+  &.home-ranking-text {
+    @media screen and (min-width: 992px) {
+      padding: 20px 58px;
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      padding: 20px 44px;
+    }
+  }
+}
+
+.btn-home-content-border:hover {
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+
+.home-modal {
+  display: flex;
+  flex-direction: column;
+  margin: 36px 48px;
+
+  @media screen and (max-width: 575px) {
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 48px;
+    margin-right: 48px;
+  }
+
+  @media screen and (max-width: 397px) {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  p {
+    @media screen and (min-width: 423px) and (max-width: 991px) {
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 422px) {
+      font-size: 1rem;
+    }
+  }
+}

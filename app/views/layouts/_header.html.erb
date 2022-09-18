@@ -1,7 +1,12 @@
 <div class="container-fluid">
   <%= link_to image_tag("aniaq_logo.png", class:"header-logo"), root_path %>
   <div class="d-none d-md-flex">
-    <ul class="d-flex flex-row p-0 m-0">
+    <ul class="d-flex flex-row align-items-center p-0 m-0">
+      <% if user_signed_in? %>
+        <%= link_to home_path do %>
+          <li class="nav-item me-4"><i class="bi bi-house-fill" style="font-size: 20px; color: #db5876;"></i></li>
+        <% end %>
+      <% end %>
       <li class="nav-item me-4">
         <% if user_signed_in? %>
           <%= link_to "アカウント編集", edit_user_registration_path, class: 'nav-link active' %>
@@ -11,7 +16,7 @@
       </li>
       <li class="nav-item me-3">
         <% if user_signed_in? %>
-          <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+          <%= button_to "ログアウト", destroy_user_session_path, class: 'nav-link active', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } %>
         <% else %>
           <%= link_to "ログイン", new_user_session_path, class: 'nav-link active header-btn header-btn-pink' %>
         <% end %>
@@ -20,7 +25,14 @@
   </div>
   <div class="hamburger-menu d-md-none">
     <input type="checkbox" id="menu-btn-check">
-    <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    <div class="d-flex align-items-center">
+      <% if user_signed_in? %>
+        <%= link_to home_path do %>
+          <div class="mobile-home-icon"><i class="bi bi-house-fill"></i></div>
+        <% end %>
+      <% end %>
+      <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    </div>
     <div class="menu-content">
       <div class="menu-content-card">
         <div class="card mb-3">
@@ -39,14 +51,25 @@
       <ul>
         <li class="nav-item">
           <% if user_signed_in? %>
-            <%= link_to "アカウント編集", edit_user_registration_path, class: 'nav-link active' %>
+            <%= link_to home_path, class: 'nav-link active' do %>
+              <i class="bi bi-house me-2"></i>ホーム
+            <% end %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to edit_user_registration_path, class: 'nav-link active' do %>
+              <i class="bi bi-person me-2"></i>アカウント編集
+            <% end %>
           <% else %>
             <%= link_to "新規登録", new_user_registration_path, class: 'nav-link active' %>
           <% end %>
         </li>
         <li class="nav-item">
           <% if user_signed_in? %>
-            <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-link active', data: { turbo_method: :delete, turbo_confirm: 'ログアウトしますか？' } %>
+            <%= button_to destroy_user_session_path, class: 'nav-link active logout-hamburger', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } do %>
+              <i class="bi bi-box-arrow-in-left me-2"></i>ログアウト
+            <% end %>
           <% else %>
             <%= link_to "ログイン", new_user_session_path, class: 'nav-link active' %>
           <% end %>

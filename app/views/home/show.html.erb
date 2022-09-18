@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="top-container">
+    <div>
+      <%= image_tag 'aniaq_logo2.png', class: 'aniaq_logo2' %>
+    </div>
+    <div class="player-info mt-5">
+      <p class="player-info-label">クイズで遊んだ回数</p>
+      <p class="player-info-content"><%= Package.where(user_id: current_user.id).count %>回</p>
+      <p class="player-info-label">現在のランキング</p>
+      <p class="player-info-label">*総合問題</p>
+      <p class="player-info-content border-0 mb-0"><%= @complete_best_ranking %>位</p>
+      <p class="player-info-label">*アニメ選択問題</p>
+      <p class="player-info-content"><%= @selected_best_ranking %>位</p>
+      <p class="player-info-label">作成したクイズ</p>
+      <p class="player-info-content"><%= current_user.quizzes.count %>問</p>
+      <p class="player-info-label">獲得いいね数</p>
+      <p class="player-info-content m-0">
+        <%= Quiz.joins(:likes).where(user_id: current_user.id).count %><i class="bi bi-hand-thumbs-up ms-1"></i>
+      </p>
+    </div>
+  </div>
+  <div class="home-content">
+    <%= link_to new_quiz_path, class: "btn-home-content btn-home-content-border" do %>
+      <span>
+        <%= image_tag 'new-quiz.png', size: '80x80' %>
+        <p class="text-center m-0">クイズを作る</p>
+      </span>
+    <% end %>
+    <button type="button" class="btn-home-content btn-home-content-border" data-bs-toggle="modal" data-bs-target="#playQuizModal">
+      <span>
+        <%= image_tag 'play-quiz.png', size: '80x80' %>
+        <p class="text-center m-0">クイズで遊ぶ</p>
+      </span>
+    </button>
+    <%= link_to rankings_path, class: "btn-home-content btn-home-content-border" do %>
+      <span class="home-ranking-text">
+        <%= image_tag 'ranking.png', size: '80x80' %>
+        <p class="text-center m-0">ランキング</p>
+      </span>
+    <% end %>
+  </div>
+  <%= render partial: 'home/modal' %>
+</div>
