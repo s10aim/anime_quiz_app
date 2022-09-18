@@ -57,20 +57,23 @@
   @include media-breakpoint-down(md) {
     flex-direction: column;
     margin-top: 75px;
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+
+  @media screen and (max-width: 466px) {
     margin-left: 50px;
     margin-right: 50px;
   }
 }
 
 .btn-home-content,
-a.btn-home-content,
 button.btn-home-content {
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.5;
   position: relative;
   display: inline-block;
-  padding: 20px 48px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -102,7 +105,7 @@ button.btn-home-content {
   }
 }
 
-a.btn-home-content-border {
+.btn-home-content-border {
   margin-bottom: 12px;
   padding: 10px;
 
@@ -124,7 +127,7 @@ a.btn-home-content-border {
   }
 }
 
-a.btn-home-content-border span {
+.btn-home-content-border span {
   position: relative;
 
   display: block;
@@ -151,7 +154,38 @@ a.btn-home-content-border span {
   }
 }
 
-a.btn-home-content-border:hover {
+.btn-home-content-border:hover {
   background-position: 0 0, 8px 8px;
   background-size: 16px 16px;
+}
+
+.home-modal {
+  display: flex;
+  flex-direction: column;
+  margin: 36px 48px;
+
+  @media screen and (max-width: 575px) {
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 48px;
+    margin-right: 48px;
+  }
+
+  @media screen and (max-width: 397px) {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  p {
+    @media screen and (min-width: 423px) and (max-width: 991px) {
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 422px) {
+      font-size: 1rem;
+    }
+  }
 }

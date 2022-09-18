@@ -26,12 +26,12 @@
         <p class="text-center m-0">クイズを作る</p>
       </span>
     <% end %>
-    <%= link_to new_quiz_path, class: "btn-home-content btn-home-content-border" do %>
+    <button type="button" class="btn-home-content btn-home-content-border" data-bs-toggle="modal" data-bs-target="#playQuizModal">
       <span>
         <%= image_tag 'quiz_report.svg', size: '80x80' %>
         <p class="text-center m-0">クイズで遊ぶ</p>
       </span>
-    <% end %>
+    </button>
     <%= link_to rankings_path, class: "btn-home-content btn-home-content-border" do %>
       <span class="home-ranking-text">
         <%= image_tag 'ranking.svg', size: '80x80' %>
@@ -39,4 +39,5 @@
       </span>
     <% end %>
   </div>
+  <%= render partial: 'home/modal' %>
 </div>
