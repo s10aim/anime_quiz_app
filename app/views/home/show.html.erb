@@ -22,19 +22,19 @@
   <div class="home-content">
     <%= link_to new_quiz_path, class: "btn-home-content btn-home-content-border" do %>
       <span>
-        <%= image_tag 'create_quiz.svg', size: '80x80' %>
+        <%= image_tag 'new-quiz.png', size: '80x80' %>
         <p class="text-center m-0">クイズを作る</p>
       </span>
     <% end %>
     <button type="button" class="btn-home-content btn-home-content-border" data-bs-toggle="modal" data-bs-target="#playQuizModal">
       <span>
-        <%= image_tag 'quiz_report.svg', size: '80x80' %>
+        <%= image_tag 'play-quiz.png', size: '80x80' %>
         <p class="text-center m-0">クイズで遊ぶ</p>
       </span>
     </button>
     <%= link_to rankings_path, class: "btn-home-content btn-home-content-border" do %>
       <span class="home-ranking-text">
-        <%= image_tag 'ranking.svg', size: '80x80' %>
+        <%= image_tag 'ranking.png', size: '80x80' %>
         <p class="text-center m-0">ランキング</p>
       </span>
     <% end %>

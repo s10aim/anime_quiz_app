@@ -96,12 +96,16 @@ button.btn-home-content {
     font-size: 1rem;
   }
 
-  @media screen and (min-width: 396px) and (max-width: 416px) {
+  @include media-breakpoint-down(md) {
     font-size: 1.4rem;
   }
 
-  @media screen and (max-width: 395px) {
+  @media screen and (min-width: 400px) and (max-width: 416px) {
     font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 399px) {
+    font-size: 1rem;
   }
 }
 
