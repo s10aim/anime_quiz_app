@@ -14,6 +14,7 @@ class DescriptionsController < ApplicationController
       session[:guest_id] = @package.guest_id
       redirect_to plays_path
     else
+      @select_animes_collection = Anime.having_quiz_collection
       render :show, status: :unprocessable_entity
     end
   end
