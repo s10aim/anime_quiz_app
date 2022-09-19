@@ -47,7 +47,11 @@
   max-width: 1000px;
   justify-content: space-between;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 70px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 50px;
+  }
 
   @media screen and (min-width: 992px) and (max-width: 1023px) {
     margin-left: 50px;

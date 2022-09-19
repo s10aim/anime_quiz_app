@@ -5,6 +5,7 @@
 @import './btn';
 @import './form';
 @import './home';
+@import './description';
 
 /* Fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
@@ -46,7 +47,6 @@ html {
 .main-wrapper {
   position: relative;
   flex: 1;
-  margin-bottom: 65px;
 }
 
 h1 {
