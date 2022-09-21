@@ -24,6 +24,7 @@
   font-style: italic;
 }
 
+// 説明
 .desc-content-box {
   position: relative;
   margin: 2em 0;
@@ -32,6 +33,7 @@
   border: solid 3px #f0a3b3;
   border-radius: 8px;
 }
+
 .desc-content-box .box-title {
   position: absolute;
   display: inline-block;
@@ -48,81 +50,4 @@
 .desc-content-box p {
   margin: 0;
   padding: 2px 0;
-}
-
-// ボタン共通
-.desc-btn-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
-
-  @include media-breakpoint-up(sm) {
-    justify-content: start;
-  }
-}
-
-// スタートボタン
-.desc-start {
-  display: flex;
-  justify-content: center;
-}
-
-.btn-start {
-  padding: 12px 18px;
-  border-radius: 10px;
-  border: 0;
-  background-color: rgb(255, 56, 86);
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
-  color: hsl(0, 0%, 100%);
-}
-
-.btn-start:hover {
-  box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
-}
-
-.btn-start:active {
-  background-color: rgb(255, 56, 86);
-  box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
-  transform: translateY(5px);
-  transition: 200ms;
-}
-
-// 戻るボタン
-.btn-back {
-  display: flex;
-  color: pink;
-  height: 3em;
-  width: 100px;
-  align-items: center;
-  justify-content: center;
-  background-color: #eeeeee4b;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  letter-spacing: 1px;
-  transition: all 0.2s linear;
-  cursor: pointer;
-  background: #fff;
-  margin-top: 8px;
-  margin-left: 24px;
-}
-
-.btn-back > img {
-  margin-right: 5px;
-  margin-left: 5px;
-  font-size: 20px;
-  transition: all 0.4s ease-in;
-}
-
-.btn-back:hover > img {
-  font-size: 1.2em;
-  transform: translateX(-5px);
-}
-
-.btn-back:hover {
-  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
-  transform: translateY(-2px);
 }

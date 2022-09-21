@@ -1,0 +1,7 @@
+// クイズ作成
+.btn-quiz-back {
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+    padding: 0;
+  }
+}
