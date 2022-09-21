@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <% if @package.category == "complete" %>
-    <h1 class="desc-title" data-en="ANIAQ">総合問題</h1>
+    <h1 class="main-title" data-en="ANIAQ">総合問題</h1>
     <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
       <p><%= f.input :category, as: :hidden, input_html: { value: params[:category] } %></p>
       <div class="desc-content-box">
@@ -32,7 +32,7 @@
     <% end %>
   <% end %>
   <% if @package.category == "selected" %>
-    <h1 class="desc-title" data-en="ANIAQ">アニメ選択問題</h1>
+    <h1 class="main-title" data-en="ANIAQ">アニメ選択問題</h1>
     <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
       <p>
         <%= f.input :anime_id, as: :select,

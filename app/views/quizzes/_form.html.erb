@@ -1,6 +1,6 @@
 <%# required_variables: target %>
 <div class="container mt-3">
-  <h1 class="pb-0"><%= Quiz.model_name.human %><%= target %></h1>
+  <h1 class="main-title" data-en="Create"><%= Quiz.model_name.human %><%= target %></h1>
   <div>
     <%= simple_form_for @quiz do |f| %>
       <p><%= f.input :anime, as: :select, collection: Anime.published.pluck(:title, :id), selected: @quiz.anime_id, prompt: '選択してください', label: "#{Anime.model_name.human}作品" %></p>
