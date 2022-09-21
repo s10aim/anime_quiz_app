@@ -1,23 +1,14 @@
-<div class="container mt-3">
-  <h1 class="my-4"><%= target %>一覧</h1>
-  <%= link_to "#{Quiz.model_name.human}作成", new_quiz_path %>
-  <% if request.path.match(/\/draft(\/)?/) %>
-    <%= link_to "クイズ一覧", quizzes_path %>
-  <% else %>
-    <%= link_to "下書き一覧", draft_quizzes_path %>
-  <% end %>
-  <%= link_to "トップに戻る", root_path %>
-  <div class="mt-4">
+<div class="container px-4">
+  <h1 class="main-title mb-5" data-en=<%= status %>><%= target %></h1>
+  <div>
     <% @quizzes.each do |quiz| %>
-      <div class="card mb-4">
-        <div class="card-body">
-          <p>【<%= Anime.model_name.human %>作品】</p>
-          <h5 class="card-title ms-2 mb-4"><%= quiz.anime.title %></h5>
-          <p>【<%= Quiz.human_attribute_name(:question) %>】<%= simple_format(h(quiz.question), class: "ms-2") %></p>
-          <%= link_to "詳細", quiz_path(quiz) %>
-          <%= link_to "編集", edit_quiz_path(quiz) %>
-          <%= link_to "削除", quiz_path(quiz), data: { turbo_method: :delete, turbo_confirm: '削除しますか？' } %>
-        </div>
+      <div class="card quiz-idx-card mb-5 shadow">
+        <%= link_to quiz_path(quiz), class: "card-body quiz_index" do %>
+          <p class="card-anime-label"><%= Anime.model_name.human %>作品</p>
+          <h5 class="card-title card-anime-title"><%= quiz.anime.title %></h5>
+          <div class="index-q">Q.</div>
+          <%= simple_format(h(quiz.question)) %>
+        <% end %>
       </div>
     <% end %>
   </div>

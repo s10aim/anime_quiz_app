@@ -5,3 +5,46 @@
     padding: 0;
   }
 }
+
+// クイズ一覧
+.quiz-idx-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quiz-idx-card:hover {
+  transform: translateY(-5px);
+}
+
+.quiz_index {
+  text-decoration: none;
+  padding: 36px;
+  color: inherit;
+  background-image: url('translucent-logo.png');
+  background-size: 200px 175px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.card-anime-label {
+  color: #a1aab3;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card-anime-title {
+  font-size: 22px;
+  margin-bottom: 28px;
+}
+
+.index-q {
+  color: #a1aab3;
+  width: 28px;
+  margin-bottom: 14px;
+  text-align: center;
+  border: 1px solid #a1aab3;
+}
