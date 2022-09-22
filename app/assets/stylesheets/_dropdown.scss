@@ -1,0 +1,32 @@
+.btn-link {
+  &:hover,
+  &:active {
+    color: #5e5e5e;
+  }
+
+  &:focus {
+    color: #db5876;
+  }
+}
+
+.header-dropdown a {
+  color: #5e5e5e;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.dropdown-menu a.nav-link {
+  padding: 4px 16px;
+  margin: 0;
+}
+
+.header-dropdown button {
+  color: #5e5e5e;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.dropdown-menu button.nav-link {
+  padding: 4px 16px;
+  margin: 0;
+}

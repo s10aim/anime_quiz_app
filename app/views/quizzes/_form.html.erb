@@ -52,8 +52,6 @@
   <div class="btn-quiz-back">
     <% if request.path.match(/\/edit(\/)?/) %>
       <%= link_to "詳細に戻る", quiz_path(@quiz) %>
-    <% elsif request.path.match(/\/new(\/)?/) %>
-      <%= link_to "公開#{Quiz.model_name.human}", quizzes_path %>
     <% end %>
   </div>
 </div>
