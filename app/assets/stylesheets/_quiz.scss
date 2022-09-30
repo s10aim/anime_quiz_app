@@ -48,3 +48,58 @@
   text-align: center;
   border: 1px solid #a1aab3;
 }
+
+// クイズ詳細
+.card-quiz-detail {
+  max-width: 600px;
+  margin: 0 auto;
+
+  &.card-body {
+    position: relative;
+  }
+
+  p {
+    align-items: center;
+  }
+}
+
+.quiz-detail-label {
+  font-size: 4px;
+  margin-right: 8px;
+}
+
+.tag-status {
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  right: 24px;
+  margin: 0 0.1em 0.6em 0;
+  padding: 0.6em;
+  line-height: 1;
+  text-decoration: none;
+  color: #db5876;
+  background-color: #fff;
+  border: 1px solid #db5876;
+  border-radius: 2em;
+}
+
+.detail-link-group {
+  margin-top: 20px;
+  margin-bottom: 16px;
+
+  a {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
+
+.detail-bottom {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 48px;
+
+  a {
+    color: #ff91af;
+    font-weight: bold;
+  }
+}
