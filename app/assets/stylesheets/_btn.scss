@@ -129,6 +129,10 @@
   transition-duration: 1s;
   transition-property: border-top, border-left, border-bottom, border-right, box-shadow;
   margin-bottom: 16px;
+
+  &-selected {
+    background: #fff4fd;
+  }
 }
 
 .btn-choice:hover {

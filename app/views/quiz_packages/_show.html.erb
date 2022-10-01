@@ -1,14 +1,20 @@
 <%= turbo_frame_tag 'quiz_package' do %>
-  <p>Q<%= quiz_package.position %>.</p>
-  <p><%= quiz_package.quiz.question %></p>
+  <div class="play-quiz-top">
+    <p class="index-q play-quiz-q">Q<%= quiz_package.position %>.</p>
+    <p class="play-quiz-title"><%= quiz_package.quiz.anime.title %></p>
+    <p class="play-quiz-position"><%= quiz_package.position %>/<%= quiz_package.package.quiz_packages.count %></p>
+  </div>
+  <div class="mb-5">
+    <%= simple_format(h(quiz_package.quiz.question)) %>
+  </div>
   <% quiz_package.quiz.choices.shuffle.each do |choice| %>
     <% if quiz_package.position == quiz_package.package.quiz_packages.pluck(:position).max %>
-      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary", 'data-turbo-frame': '_top' } %>
+      <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "btn-choice", 'data-turbo-frame': '_top' } %>
     <% else %>
       <% if choice.id == quiz_package.choice_id %>
-        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-warning" } %>
+        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "btn-choice btn-choice-selected" } %>
       <% else %>
-        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "mb-2 btn btn-outline-secondary" } %>
+        <%= button_to "#{choice.body}", quiz_package_path(quiz_package), { method: :put, params: { quiz_package: { choice_id: choice.id}}, class: "btn-choice" } %>
       <% end %>
     <% end %>
   <% end %>
