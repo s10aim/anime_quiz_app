@@ -1,2 +1,4 @@
-<%= link_to "★", quiz_likes_path(quiz), data: { turbo_method: :delete } %>
+<%= link_to quiz_likes_path(quiz), data: { turbo_method: :delete } do %>
+  <i class="bi bi-heart-fill"></i>
+<% end %>
 <%= render partial: "likes/like_count", locals: { liked_quiz_map: @liked_quiz_map, quiz_id: quiz.id } %>
