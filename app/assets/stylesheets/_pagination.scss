@@ -1,0 +1,29 @@
+.pagination {
+  justify-content: center;
+}
+
+.pagination > li > a {
+  border: none;
+  color: #696969;
+}
+
+.page-item {
+  margin-left: 5px;
+}
+
+.page-item {
+  &:first-child .page-link,
+  &:last-child .page-link {
+    border-radius: 15px;
+  }
+}
+
+.pagination > .active > a {
+  background: rgba(224, 66, 114, 0.2);
+  border-radius: 15px;
+}
+
+.pagination > li > a:hover {
+  color: #fff;
+  border-radius: 15px;
+}

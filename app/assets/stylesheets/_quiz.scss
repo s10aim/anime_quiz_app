@@ -1,0 +1,106 @@
+// クイズ作成
+.btn-quiz-back {
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+    padding: 0;
+  }
+}
+
+// クイズ一覧
+.quiz-idx-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quiz-idx-card:hover {
+  transform: translateY(-5px);
+}
+
+.quiz_index {
+  text-decoration: none;
+  padding: 36px;
+  color: inherit;
+  background-image: url('translucent-logo.png');
+  background-size: 200px 175px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.card-anime-label {
+  color: #a1aab3;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card-anime-title {
+  font-size: 22px;
+  margin-bottom: 28px;
+}
+
+.index-q {
+  color: #a1aab3;
+  width: 28px;
+  margin-bottom: 14px;
+  text-align: center;
+  border: 1px solid #a1aab3;
+}
+
+// クイズ詳細
+.card-quiz-detail {
+  max-width: 600px;
+  margin: 0 auto;
+
+  &.card-body {
+    position: relative;
+  }
+
+  p {
+    align-items: center;
+  }
+}
+
+.quiz-detail-label {
+  color: #a1aab3;
+  font-size: 10px;
+  margin-right: 8px;
+}
+
+.tag-status {
+  display: inline-block;
+  position: absolute;
+  top: 30px;
+  right: 24px;
+  margin: 0 0.1em 0.6em 0;
+  padding: 0.6em;
+  line-height: 1;
+  text-decoration: none;
+  color: #db5876;
+  background-color: #fff;
+  border: 1px solid #db5876;
+  border-radius: 2em;
+}
+
+.detail-link-group {
+  margin-top: 20px;
+  margin-bottom: 16px;
+
+  a {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
+
+.detail-bottom {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 48px;
+
+  a {
+    color: #ff91af;
+    font-weight: bold;
+  }
+}

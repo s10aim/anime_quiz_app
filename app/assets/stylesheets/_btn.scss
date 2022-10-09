@@ -1,3 +1,238 @@
+// ボタン共通
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+
+  @include media-breakpoint-up(sm) {
+    justify-content: start;
+  }
+}
+
+// main
+.btn-main-group {
+  display: flex;
+  justify-content: center;
+}
+
+// normal
+.btn-normal {
+  appearance: button;
+  background-color: #f16272;
+  border-radius: 16px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 14px 19px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: #fff;
+    background-color: #f16272;
+  }
+}
+
+// start
+.btn-start {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(255, 56, 86);
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+}
+
+.btn-start:hover {
+  box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+
+.btn-start:active {
+  background-color: rgb(255, 56, 86);
+  box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+// back
+.btn-home-back {
+  display: flex;
+  color: pink;
+  height: 3em;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee4b;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  background: #fff;
+  margin-top: 8px;
+  margin-left: 24px;
+}
+
+.btn-home-back > img {
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 20px;
+  transition: all 0.4s ease-in;
+}
+
+.btn-home-back:hover > img {
+  font-size: 1.2em;
+  transform: translateX(-5px);
+}
+
+.btn-home-back:hover {
+  box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-quiz-back {
+  margin-bottom: 36px;
+  padding-left: 21px;
+
+  a {
+    color: pink;
+  }
+}
+
+// 選択肢
+.btn-choice {
+  width: 100%;
+  text-align: start;
+  padding: 0.7rem 2rem;
+  font-weight: 700;
+  background: rgb(255, 255, 255);
+  color: #333333;
+  border-radius: 0.5rem;
+  border: 2px solid #a1aab3;
+  margin-bottom: 16px;
+
+  &-selected {
+    background: #fff4fd;
+  }
+}
+
+// replay-quiz
+.btn-replay-quiz {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 0.8em 1.3em 0.8em 0.9em;
+  color: white;
+  background: #db5876;
+  border: none;
+  letter-spacing: 0.05em;
+  border-radius: 16px;
+  margin-left: 24px;
+}
+
+.btn-replay-quiz img {
+  margin-right: 3px;
+  transform: rotate(30deg);
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-replay-quiz span {
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.btn-replay-quiz:hover img {
+  transform: translateX(5px) rotate(90deg);
+}
+
+.btn-replay-quiz:hover span {
+  transform: translateX(7px);
+}
+
+// クイズ報告
+.btn.btn-link {
+  &:hover {
+    color: #0a58ca;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.btn-send-report {
+  font-family: inherit;
+  font-size: 14px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+
+  &:hover {
+    background: royalblue;
+  }
+}
+
+.btn-send-report span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-send-report img {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-send-report:hover .send-img-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.btn-send-report:hover img {
+  color: #ffffff;
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.btn-send-report:hover span {
+  transform: translateX(5em);
+}
+
+.btn-send-report:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
 // ログイン関連
 .button-panel {
   margin: 2em 0 0;
@@ -21,9 +256,4 @@
 
 .button:hover {
   background: #ee3e52;
-}
-
-// クイズ報告
-.btn.btn-link:focus {
-  box-shadow: none;
 }

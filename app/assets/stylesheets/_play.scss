@@ -1,0 +1,67 @@
+.card-play-quiz {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.play-quiz-top {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 18px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.play-quiz-q {
+  width: auto;
+  font-size: 16px;
+  padding: 6px;
+}
+
+.play-quiz-title {
+  color: #db5876;
+  padding: 0 8px;
+
+  @include media-breakpoint-down(md) {
+    max-width: 370px;
+  }
+
+  @media screen and (max-width: 530px) {
+    max-width: 340px;
+  }
+
+  @media screen and (max-width: 500px) {
+    max-width: 300px;
+  }
+
+  @media screen and (max-width: 480px) {
+    max-width: 280px;
+  }
+
+  @media screen and (max-width: 450px) {
+    max-width: 250px;
+  }
+
+  @media screen and (max-width: 415px) {
+    max-width: 240px;
+  }
+}
+
+.play-quiz-position {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  font-size: 18px;
+  font-family: 'Georgia', serif;
+
+  @include media-breakpoint-down(md) {
+    font-size: 16px;
+  }
+}
+
+#quiz_package form {
+  padding: 0;
+}

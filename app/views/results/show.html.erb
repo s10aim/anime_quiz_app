@@ -1,84 +1,144 @@
 <div class="container mt-3" data-controller="turbo_modal">
-  <h1 class="my-5 text-center">結果発表</h1>
-  <div class="card mb-5">
+  <h1 class="main-title" data-en="Result">結果発表</h1>
+  <div class="card card-result">
     <div class="card-body p-4 p-md-5">
       <div class="mt-4">
-        <p>【かかった時間】</p>
-        <p class="ms-3">
-          <% if @times[0] != 0 %>
-            <%= @times[0] %>分
-          <% end %>
-          <%= @times[1] %>秒
-        </p>
-        <p>【クイズの正解数】</p>
-        <p class="ms-3"><%= @package.quiz_score %> / <%= @package.quiz_packages.count %></p>
-        <p>【ランキングスコア】</p>
-        <p class="ms-3"><%= @package.ranking_score %>点</p>
-        <p>【ランキング】</p>
-        <p class="ms-3"><%= @ranking %>位</p>
+        <div class="quiz-result">
+          <p>所要時間</p>
+          <p class="quiz-result-detail">
+            <% if @times[0] != 0 %>
+              <%= @times[0] %>分
+            <% end %>
+            <%= @times[1] %>秒
+          </p>
+        </div>
+        <div class="quiz-result">
+          <p>クイズの正解数</p>
+          <p class="quiz-result-detail"><%= @package.quiz_score %> / <%= @package.quiz_packages.count %></p>
+        </div>
+        <div class="quiz-result">
+          <p>スコア</p>
+          <p class="quiz-result-detail"><%= @package.ranking_score %>点</p>
+        </div>
+        <div class="quiz-result">
+          <p>ランキング</p>
+          <p class="quiz-result-detail"><%= @ranking %>位</p>
+        </div>
       </div>
-      <hr class="my-5">
+      <hr class="border-result">
       <% @package.quiz_packages.includes(quiz: [:choices, :likes]).order(position: :asc).each do |quiz_package| %>
-        <div class="card mb-5">
+        <% correct_choice = @correct_choice_map[quiz_package.quiz_id] %>
+        <div class="card card-result-quiz">
           <div class="card-body p-4 p-md-5">
-            <%# TODO: 実際は表示しないので後でdivごと消す %>
-            <div class="mb-4">
-              <p>*パッケージID: <%= quiz_package.package.id %></p>
-              <% if user_signed_in? %>
-                <p>*Player ID: <%= quiz_package.package.user_id %></p>
-              <% else %>
-                <p>*Player ID: <%= quiz_package.package.guest_id %></p>
-              <% end %>
+            <div class="result-detail-top-group">
+              <p class="index-q result-quiz-q">Q<%= quiz_package.position %>.</p>
+              <p class="result-quiz-title"><%= quiz_package.quiz.anime.title %></p>
             </div>
-            <%# /TODO %>
-            <div class="d-flex">
-              <p>Q<%= quiz_package.position %>.</p>
-              <p class="mx-4" style="color: #eb6877;">
-                <% if @correct_answer_count_map[quiz_package.quiz_id].nil? %>
-                  *正答率: 0%
-                <% else %>
-                  *正答率: <%= (@correct_answer_count_map[quiz_package.quiz_id].quo(@answer_count_map[quiz_package.quiz_id])
-                                                                              .to_f.floor(3) * 100).round %>%
-                <% end %>
-              </p>
+            <div class="result-question-group">
+              <%= simple_format(h(quiz_package.quiz.question)) %>
             </div>
-            <p class="mb-4"><%= quiz_package.quiz.question %></p>
             <% quiz_package.quiz.choices.each do |choice| %>
-              <div class="d-flex flex-column my-3">
-                <% if quiz_package.choice_id == choice.id %>
-                  <button type="button" class="btn btn-outline-warning"><%= choice.body %></button>
+              <%# choice がユーザーが選んだ選択肢と一致 %>
+              <% matches_user_choice = quiz_package.choice_id == choice.id %>
+              <%# choice が正解の選択肢と一致 %>
+              <% matches_correct_choice = choice.id == correct_choice.id %>
+              <div class="btn-result-group">
+                <% if matches_user_choice && matches_correct_choice %>
+                  <%# クイズに正解 %>
+                  <button type="button" class="btn-choice btn-choice-selected add-choice-position ps-3">
+                    <div class="btn-result-choice">
+                      <div class="double-circle-icon"></div>
+                      <div><%= choice.body %></div>
+                    </div>
+                  </button>
+                <% elsif matches_user_choice %>
+                  <%# ユーザーの選択肢 %>
+                  <button type="button" class="btn-choice btn-choice-selected add-choice-position x-icon-group ps-3">
+                    <div class="btn-result-choice">
+                      <div class="x-icon"></div>
+                      <div><%= choice.body %></div>
+                    </div>
+                  </button>
+                <% elsif matches_correct_choice %>
+                  <%# クイズの正しい正解 %>
+                  <button type="button" class="btn-choice add-choice-position ps-3">
+                    <div class="btn-result-choice">
+                      <div class="circle-icon"></div>
+                      <div><%= choice.body %></div>
+                    </div>
+                  </button>
                 <% else %>
-                  <button type="button" class="btn btn-outline-secondary"><%= choice.body %></button>
+                  <button type="button" class="btn-choice">
+                    <div><%= choice.body %></div>
+                  </button>
                 <% end %>
               </div>
             <% end %>
-            <p class="my-4">【正解の選択肢】<%= @correct_choice_map[quiz_package.quiz_id].body %></p>
             <% if quiz_package.quiz.description.present? %>
-              <div class="p-3 my-4" style="background-color: #f1f1ef;">
+              <div class="p-3 mt-3 mb-5" style="background-color: #f1f1ef;">
                 <%= quiz_package.quiz.description %>
               </div>
             <% end %>
-            <% if !@package.user_id.nil? %>
-              <div id="quiz-like-<%= quiz_package.quiz.id %>">
-                <% if quiz_package.quiz.liked_by?(current_user) %>
-                  <%# 「いいね！」済み（クリックすると「いいね」解除） %>
-                  <%= render partial: "likes/dislike", locals: { quiz: quiz_package.quiz } %>
-                <% else %>
-                  <%# 「いいね」していない（クリックすると「いいね！」にする） %>
-                  <%= render partial: "likes/like", locals: { quiz: quiz_package.quiz } %>
-                <% end %>
-              </div>
-              <%= link_to new_quiz_reports_path(quiz_package.quiz), data: { turbo_frame: "quiz-report-modal-content", action: "click->turbo_modal#showModal" } do %>
-                <button type="button" class="btn btn-link p-0 pt-3">
-                  報告
-                </button>
+            <div class="result-detail-top-group">
+              <% if user_signed_in? %>
+                <div id="quiz-like-<%= quiz_package.quiz.id %>" class="like-quiz">
+                  <% if quiz_package.quiz.liked_by?(current_user) %>
+                    <%# 「いいね！」済み（クリックすると「いいね」解除） %>
+                    <%= render partial: "likes/dislike", locals: { quiz: quiz_package.quiz } %>
+                  <% else %>
+                    <%# 「いいね」していない（クリックすると「いいね！」にする） %>
+                    <%= render partial: "likes/like", locals: { quiz: quiz_package.quiz } %>
+                  <% end %>
+                </div>
+                <div>
+                  <%= link_to new_quiz_reports_path(quiz_package.quiz), data: { turbo_frame: "quiz-report-modal-content", action: "click->turbo_modal#showModal" } do %>
+                    <button type="button" class="btn btn-link">
+                      報告
+                    </button>
+                  <% end %>
+                </div>
               <% end %>
-            <% end %>
+              <div class="my-4">
+                <p class="correct-answer-rate">
+                  <% if @correct_answer_count_map[quiz_package.quiz_id].nil? %>
+                    *正答率: 0%
+                  <% else %>
+                    *正答率: <%= (@correct_answer_count_map[quiz_package.quiz_id].quo(@answer_count_map[quiz_package.quiz_id])
+                                                                              .to_f.floor(3) * 100).round %>%
+                  <% end %>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>
-      <div class="d-grid gap-2 col-6 mx-auto mb-3">
-        <%= link_to "トップ画面に戻る", root_path, class: "btn btn-outline-primary" %>
+      <div class="d-flex justify-content-center mb-3">
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to home_path do %>
+              <button class="btn-home-back m-0 mt-1">
+                <%= image_tag 'back_arrow.svg' %>
+                <span>Home</span>
+              </button>
+            <% end %>
+          <% elsif %>
+            <%= link_to root_path do %>
+              <button class="btn-home-back m-0 mt-1">
+                <%= image_tag 'back_arrow.svg' %>
+                <span>TOP</span>
+              </button>
+            <% end %>
+          <% end %>
+        </div>
+        <div>
+          <% category_target = @package.category == "selected" ? "selected" : "complete" %>
+          <%= link_to descriptions_path(category: category_target) do %>
+            <button class="btn-replay-quiz">
+              <%= image_tag "rocket.svg" %>
+              <span>再挑戦する</span>
+            </button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
