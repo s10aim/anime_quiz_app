@@ -76,6 +76,7 @@
     margin: 50px 20px;
   }
 }
+
 .my-ranking-wrapper .box-title {
   position: absolute;
   display: inline-block;
@@ -89,9 +90,16 @@
   color: #ffffff;
   font-weight: bold;
 }
+
 .my-ranking-wrapper p {
   margin: 0;
   padding: 0;
+}
+
+.my-ranking-wrapper .card {
+  a:hover {
+    color: pink;
+  }
 }
 
 .complete-wrapper {
