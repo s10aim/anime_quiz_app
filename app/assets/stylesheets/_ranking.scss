@@ -1,6 +1,110 @@
 .ranking-menu-wrapper {
+  display: flex;
+  justify-content: center;
   margin-top: 50px;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+}
+
+.ranking-menu-wrapper a {
+  display: block;
   text-align: center;
+  width: 250px;
+  height: 250px;
+
+  @include media-breakpoint-down(md) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 180px;
+    height: 180px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+  }
+
+  @media screen and (max-width: 370px) {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+  }
+}
+
+.rank-menu-img {
+  width: 250px;
+  height: 250px;
+
+  @include media-breakpoint-down(md) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 180px;
+    height: 180px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    width: 250px;
+    height: 250px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 370px) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.my-ranking-wrapper {
+  position: relative;
+  margin: 2em 0;
+  padding: 25px 10px 7px;
+  border: solid 2px #db5876;
+  max-width: 450px;
+  margin: 50px auto;
+
+  @media screen and (max-width: 513px) {
+    margin: 50px 20px;
+  }
+}
+.my-ranking-wrapper .box-title {
+  position: absolute;
+  display: inline-block;
+  top: -2px;
+  left: -2px;
+  padding: 0 9px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 17px;
+  background: #db5876;
+  color: #ffffff;
+  font-weight: bold;
+}
+.my-ranking-wrapper p {
+  margin: 0;
+  padding: 0;
+}
+
+.complete-wrapper {
+  min-width: 250px;
+}
+
+.selected-wrapper {
+  min-width: 250px;
+}
+
+.my-ranking-anime-title {
+  display: inline-block;
+  margin-left: 40px;
 }
 
 .ranking-form-group {

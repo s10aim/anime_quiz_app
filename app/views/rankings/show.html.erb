@@ -1,6 +1,32 @@
 <div class="container mt-5">
-  <h1 class="my-5">ランキング</h1>
-  <p><%= link_to "今週のランキング", rankings_week_path %></p>
-  <p><%= link_to "今月のランキング", rankings_month_path %></p>
-  <p><%= link_to "作品別ランキング", rankings_anime_path %></p>
+  <h1 class="main-title" data-en="Ranking">ランキング</h1>
+  <div class="ranking-menu-wrapper">
+    <%= link_to rankings_week_path do %>
+      <%= image_tag 'ranking-week.png', class: 'rank-menu-img' %>
+    <% end %>
+    <%= link_to rankings_month_path do %>
+      <%= image_tag 'ranking-month.png', class: 'rank-menu-img' %>
+    <% end %>
+    <%= link_to rankings_anime_path do %>
+      <%= image_tag 'ranking-anime.png', class: 'rank-menu-img' %>
+    <% end %>
+  </div>
+  <div class="my-ranking-wrapper">
+    <div class="box-title">自己ベスト</div>
+    <div class="complete-wrapper p-4">
+      <p style="color: #a1aab3;">総合問題</p>
+      <p class="py-2">
+        <%= Package.complete_best_ranking(current_user) %>位
+        <span class="ms-3"><%= @my_best_score_of_complete.ranking_score %>点</span>
+      </p>
+    </div>
+    <div class="selected-wrapper p-4 pt-0">
+      <p style="color: #a1aab3;">アニメ選択問題</p>
+      <p class="py-2">
+        <%= Package.selected_best_ranking(current_user) %>位
+        <span class="ms-3"><%= @my_best_score_of_selected.ranking_score %>点</span>
+        <span class="my-ranking-anime-title"><%= @my_best_score_of_selected.anime.title %></span>
+      </p>
+    </div>
+  </div>
 </div>
