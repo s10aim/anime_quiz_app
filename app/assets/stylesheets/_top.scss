@@ -1,0 +1,43 @@
+.top-wrapper {
+  position: relative;
+  background-image: url('aniaq-top.jpg');
+  background-size: cover;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+  text-align: center;
+
+  @media screen and (max-width: 450px) {
+    height: 260px;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 0;
+    font-size: 24px;
+
+    @media screen and (max-width: 670px) {
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: 18px;
+    }
+  }
+
+  img {
+    margin-top: 70px;
+
+    @media screen and (max-width: 670px) {
+      width: 360px;
+      height: 108px;
+      margin-top: 90px;
+    }
+
+    @media screen and (max-width: 450px) {
+      width: 300px;
+      height: 92px;
+      margin-top: 75px;
+    }
+  }
+}
