@@ -1,20 +1,27 @@
 <div class="container mx-auto my-5" style="max-width: 850px;">
-  <h1 class="text-center my-5">作品別ランキング</h1>
+  <h1 class="main-title" data-en="Anime">作品別ランキング</h1>
   <%= simple_form_for :anime, url: rankings_anime_path, method: :put do |f| %>
-    <div class="row">
-      <div class="col-11">
+    <div class="ranking-form-group">
+      <div class="flex-grow-1 me-3">
         <%= f.input :id, as: :select,
                         collection: @select_animes_collection,
                         prompt: '作品を選択してください',
                         label: false %>
       </div>
-      <div class="col-1 text-start">
-        <%= f.submit '決定', class: "btn btn-secondary align-middle" %>
+      <div class="search-ranking">
+        <%= f.button :button, class: 'btn-search' do %>
+          <i class="bi bi-search"></i>
+        <% end %>
       </div>
     </div>
   <% end %>
   <div id="anime_ranking">
     <%= render partial: 'rankings/animes/table', locals: { anime_rankings: @anime_rankings } %>
   </div>
-  <%= link_to "ランキングに戻る", rankings_path %>
+  <%= link_to rankings_path do %>
+    <button class="btn-home-back">
+      <%= image_tag 'back_arrow.svg' %>
+      <span>戻る</span>
+    </button>
+  <% end %>
 </div>

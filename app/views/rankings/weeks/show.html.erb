@@ -1,6 +1,6 @@
 <div class="container mx-auto my-5" style="max-width: 850px;">
-  <h1 class="text-center my-5">今週のランキング</h1>
-  <table class="table mb-5">
+  <h1 class="main-title mb-5" data-en="Week">今週のランキング</h1>
+  <table class="table table-ranking">
     <tbody>
       <% @week_rankings.each.with_index(1) do |week_ranking, i| %>
         <tr>
@@ -11,5 +11,10 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "ランキングに戻る", rankings_path %>
+  <%= link_to rankings_path do %>
+    <button class="btn-home-back">
+      <%= image_tag 'back_arrow.svg' %>
+      <span>戻る</span>
+    </button>
+  <% end %>
 </div>

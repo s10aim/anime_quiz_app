@@ -233,6 +233,23 @@
   }
 }
 
+// search
+.bi-search {
+  color: #fff;
+}
+
+.btn-search {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #db5876;
+
+  &:hover {
+    border: none;
+    background: #db5876;
+  }
+}
+
 // ログイン関連
 .button-panel {
   margin: 2em 0 0;

@@ -24,6 +24,14 @@ class Package < ApplicationRecord
          .where(category: 'complete')
   }
 
+  scope :my_best_score_of, lambda { |user, category|
+    where(user_id: user.id)
+      .where.not(ranking_score: nil)
+      .order(ranking_score: :desc)
+      .where(category:)
+      .first
+  }
+
   scope :ordered, -> { order(ranking_score: :desc, finished_at: :asc) }
 
   class << self
