@@ -2,3 +2,74 @@
   <%= image_tag 'aniaq_logo.png' %>
   <h1>ANIME × MANIAC × QUIZ</h1>
 </div>
+<div class="container mt-5" style="max-width: 960px;">
+  <div class="feature-wrapper">
+    <div class="headline-top">
+      <div class="top-box"></div>
+      <h2 class="top-box-label">FEATURE</h2>
+      <h2 class="top-box-title">クイズでアニメを探究する</h2>
+    </div>
+    <div class="mb-5 mx-4">
+      <%# PC %>
+      <div class="d-none d-md-flex justify-content-center my-5">
+        <div class="card rounded-0">
+          <%= image_tag 'top-create-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Create">クイズを作る</h3>
+            <p class="mt-4">自分自身で問題を考えてクイズを作成することができます</p>
+          </div>
+        </div>
+        <div class="card rounded-0 mx-3">
+          <%= image_tag 'top-play-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Play">クイズで遊ぶ</h3>
+            <p class="mt-4">アニメに特化したクイズが出題されます</p>
+          </div>
+        </div>
+        <div class="card rounded-0">
+          <%= image_tag 'top-ranking.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Rank">ランキング</h3>
+            <p class="mt-4">ランキングで自身の知識量を数値化</p>
+          </div>
+        </div>
+      </div>
+      <%# スマホ %>
+      <div class="d-flex d-md-none flex-column justify-content-center my-5">
+        <div class="card card-feature rounded-0">
+          <%= image_tag 'top-create-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Create">クイズを作る</h3>
+            <p class="mt-4">自分自身で問題を考えてクイズを作成することができます</p>
+          </div>
+        </div>
+        <div class="card card-feature rounded-0 my-4">
+          <%= image_tag 'top-play-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Play">クイズで遊ぶ</h3>
+            <p class="mt-4">アニメに特化したクイズが出題されます</p>
+          </div>
+        </div>
+        <div class="card card-feature rounded-0">
+          <%= image_tag 'top-ranking.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Rank">ランキング</h3>
+            <p class="mt-4">ランキングで自身の知識量を数値化</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center d-none">
+        <div class="mx-3">
+          <%= link_to descriptions_path(category: 'complete'), class: "btn btn-normal" do %>
+            新規登録
+          <% end %>
+        </div>
+        <div class="mx-3">
+          <%= link_to descriptions_path(category: 'selected'), class: "btn btn-normal" do %>
+            ログイン
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -41,3 +41,127 @@
     }
   }
 }
+
+.headline-top {
+  position: relative;
+}
+
+.top-box {
+  border: 1px solid #f3cbd0;
+  position: relative;
+  width: 110px;
+  height: 110px;
+  margin-bottom: 60px;
+
+  @media screen and (max-width: 415px) {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 100px;
+  }
+}
+
+.top-box:after {
+  background: repeating-linear-gradient(-45deg, #f5d5da, #f5d5da 5px, #fcf0f1 0, #fcf0f1 10px); /* ストライプの色 */
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.top-box-label {
+  position: absolute;
+  top: 36px;
+  left: 40px;
+  color: #db5786;
+  text-shadow: 2px 2px #fff, 5px 5px pink;
+
+  @media screen and (max-width: 415px) {
+    top: 28px;
+  }
+}
+
+.top-box-title {
+  position: absolute;
+  top: 72px;
+  left: 70px;
+  font-size: 32px;
+  margin-right: 20px;
+  padding: 0.25em 0;
+
+  &:after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: -webkit-linear-gradient(to right, #db5786, transparent);
+    background: linear-gradient(to right, #db5786, transparent);
+  }
+
+  @media screen and (max-width: 530px) {
+    font-size: 28px;
+    top: 80px;
+    left: 36px;
+  }
+
+  @media screen and (max-width: 415px) {
+    top: 64px;
+  }
+}
+
+.top-feature-img {
+  width: 100%;
+  height: auto;
+
+  @include media-breakpoint-down(md) {
+    width: 48%;
+  }
+
+  @media screen and (max-width: 530px) {
+    width: 90%;
+  }
+}
+
+.card-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 531px) and (max-width: 767px) {
+    flex-direction: row;
+  }
+}
+
+.card-feature .card-body {
+  width: 100%;
+
+  @media screen and (max-width: 530px) {
+    padding: 16px 24px;
+  }
+}
+
+.card-feature-headline {
+  position: relative;
+  padding-top: 30px;
+  padding-left: 12px;
+  font-size: 26px;
+}
+
+.card-feature-headline span {
+  position: relative;
+  z-index: 2;
+}
+
+.card-feature-headline::before {
+  content: attr(data-en);
+  position: absolute;
+  transform: rotate(-5deg);
+  top: -3px;
+  left: 0;
+  color: rgba(224, 66, 114, 0.6);
+  font-size: 40px;
+  font-weight: 400;
+  font-family: luxus-brut, cursive;
+  font-style: italic;
+}
