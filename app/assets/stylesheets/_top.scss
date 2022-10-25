@@ -42,6 +42,98 @@
   }
 }
 
+// about
+.heading-top-about {
+  position: relative;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 36px;
+}
+
+.heading-top-about::before {
+  content: attr(data-number);
+  display: block;
+  margin-bottom: 30px;
+  color: #fc5185;
+  text-shadow: 1px 1px #fff, 3px 3px pink;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.heading-top-about::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 20px;
+  background-color: #fc5185;
+}
+
+.about-text {
+  text-align: center;
+}
+
+.about-question {
+  max-width: 750px;
+  margin: 0 auto;
+  margin-top: 75px;
+  margin-bottom: 100px;
+}
+
+.about-question h2 {
+  font-size: 24px;
+  border-bottom: solid 1px #fc5185;
+  text-align: center;
+  padding: 8px 0;
+  margin: 0 12px;
+}
+
+.about-question h2:first-letter {
+  color: #db5687;
+}
+
+.about-question ul {
+  max-width: 368px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 399px) {
+    margin: 0 8px;
+  }
+}
+
+.about-question li {
+  position: relative;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 20px 0;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: -24px;
+    width: 15px;
+    height: 8px;
+    border-left: 3px solid #da21ff;
+    border-bottom: 3px solid #da21ff;
+    transform: rotate(-45deg);
+  }
+}
+
+.border-text {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #db5687, -1px 1px 1px #db5687, 1px -1px 1px #db5687, -1px -1px 1px #db5687,
+    1px 1px 1px #db5687, -1px 1px 1px #db5687, 1px -1px 1px #db5687, -1px -1px 1px #db5687;
+  margin-top: 36px;
+}
+
+// feature
 .headline-top {
   position: relative;
 }
@@ -52,6 +144,10 @@
   width: 110px;
   height: 110px;
   margin-bottom: 60px;
+
+  @media screen and (max-width: 999px) {
+    margin-left: 12px;
+  }
 
   @media screen and (max-width: 415px) {
     width: 90px;
@@ -75,7 +171,7 @@
   position: absolute;
   top: 36px;
   left: 40px;
-  color: #db5786;
+  color: #fc5185;
   text-shadow: 2px 2px #fff, 5px 5px pink;
 
   @media screen and (max-width: 415px) {
@@ -95,8 +191,8 @@
     content: '';
     display: block;
     height: 4px;
-    background: -webkit-linear-gradient(to right, #db5786, transparent);
-    background: linear-gradient(to right, #db5786, transparent);
+    background: -webkit-linear-gradient(to right, #fc5185, transparent);
+    background: linear-gradient(to right, #fc5185, transparent);
   }
 
   @media screen and (max-width: 530px) {
