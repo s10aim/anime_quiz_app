@@ -1,6 +1,126 @@
-<div class="container mt-3">
-  <h1>Top#index</h1>
-  <p><%= link_to "総合問題を解く", descriptions_path(category: "complete") %></p>
-  <p><%= link_to "アニメを選択して解く", descriptions_path(category: "selected") %></p>
-  <p><%= link_to "ランキング", rankings_path %></p>
+<div class="top-wrapper">
+  <%= image_tag 'aniaq_logo.png' %>
+  <h1>ANIME × MANIAC × QUIZ</h1>
+</div>
+<div class="container mt-5" style="max-width: 960px;">
+  <div class="about-wrapper mb-5">
+    <h2 class="heading-top-about" data-number="ABOUT">ANIAQとは</h2>
+    <div class="about-text">
+      <p>ANIAQ（アニアック）は</p>
+      <p>普通のクイズアプリとは違う、</p>
+      <p>アニメに特化したクイズサービスです。</p>
+    </div>
+    <div class="about-question">
+      <h2>こんなことを思ったことはありませんか？</h2>
+      <ul class="my-4">
+        <li>アニメに関する知識で気軽に誰かと勝負したい</li>
+        <li>アニメの検定に向けて知識を蓄えたい</li>
+        <li>自分が見たアニメ作品のクイズを作りたい</li>
+      </ul>
+      <p class="border-text">ANIAQで全て叶います。</p>
+    </div>
+  </div>
+  <div class="feature-wrapper">
+    <div class="headline-top">
+      <div class="top-box"></div>
+      <h2 class="top-box-label">FEATURE</h2>
+      <h2 class="top-box-title">クイズでアニメを探究する</h2>
+    </div>
+    <div class="mb-5 mx-4">
+      <%# PC %>
+      <div class="d-none d-md-flex justify-content-center my-5">
+        <div class="card rounded-0">
+          <%= image_tag 'top-create-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Create">クイズを作る</h3>
+            <p class="mt-4">自分自身で問題を考えてクイズを作成することができます</p>
+          </div>
+        </div>
+        <div class="card rounded-0 mx-3">
+          <%= image_tag 'top-play-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Play">クイズで遊ぶ</h3>
+            <p class="mt-4">アニメに特化したクイズが出題されます</p>
+          </div>
+        </div>
+        <div class="card rounded-0">
+          <%= image_tag 'top-ranking.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Rank">ランキング</h3>
+            <p class="mt-4">ランキングで自身の知識量を数値化</p>
+          </div>
+        </div>
+      </div>
+      <%# スマホ %>
+      <div class="d-flex d-md-none flex-column justify-content-center my-5">
+        <div class="card card-feature rounded-0">
+          <%= image_tag 'top-create-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Create">クイズを作る</h3>
+            <p class="mt-4">自分自身で問題を考えてクイズを作成することができます</p>
+          </div>
+        </div>
+        <div class="card card-feature rounded-0 my-4">
+          <%= image_tag 'top-play-quiz.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Play">クイズで遊ぶ</h3>
+            <p class="mt-4">アニメに特化したクイズが出題されます</p>
+          </div>
+        </div>
+        <div class="card card-feature rounded-0">
+          <%= image_tag 'top-ranking.svg', class: 'top-feature-img' %>
+          <div class="card-body">
+            <h3 class="card-feature-headline" data-en="Rank">ランキング</h3>
+            <p class="mt-4">ランキングで自身の知識量を数値化</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center d-none">
+        <div class="mx-3">
+          <%= link_to descriptions_path(category: 'complete'), class: "btn btn-normal" do %>
+            新規登録
+          <% end %>
+        </div>
+        <div class="mx-3">
+          <%= link_to descriptions_path(category: 'selected'), class: "btn btn-normal" do %>
+            ログイン
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="service-wrapper">
+    <div class="headline-top">
+      <div class="top-box"></div>
+      <h2 class="top-box-label">SERVICE</h2>
+      <h2 class="top-box-title">このアプリで出来ること</h2>
+    </div>
+    <div class="mb-5 mx-4">
+      <div>
+        <h2 class="service-index" data-number="01">クイズで遊ぶ</h2>
+        <ul class="service-text-group">
+          <li>クイズは「総合問題」と「作品選択問題」があります</li>
+          <li>総合問題は作成されたすべてのクイズの中からランダムに出題されます</li>
+          <li>作品選択問題は特定のアニメ作品選択して、その中からランダムにクイズが出題されます</li>
+          <li>クイズは4択問題で1回につき10問出題されます</li>
+          <li>ログインせずに今すぐクイズに参加できます</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="service-index" data-number="02">クイズを作る</h2>
+        <ul class="service-text-group">
+          <li>アニメ作品を選択してクイズを作成</li>
+          <li>4択問題なのでサクッと作れます</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="service-index" data-number="03">ランキング</h2>
+        <ul class="service-text-group">
+          <li>総合問題に関する今週と今月のランキングをそれぞれ算出</li>
+          <li>各アニメ作品のランキングも検索可能</li>
+          <li>ランキングは上位10名を表示</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
