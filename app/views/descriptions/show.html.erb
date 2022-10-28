@@ -21,8 +21,8 @@
           <%= f.button :submit, "スタート", class: "btn-start" %>
         </div>
         <div class="btn-back">
-          <%= link_to home_path do %>
-            <button class="btn-home-back">
+          <%= link_to home_path, data: { turbo: false } do %>
+            <button class="btn-home-back" type="button">
               <%= image_tag 'back_arrow.svg' %>
               <span>Home</span>
             </button>
@@ -60,8 +60,8 @@
           <%= f.button :submit, "スタート", class: "btn-start" %>
         </div>
         <div>
-          <%= link_to home_path do %>
-            <button class="btn-home-back">
+          <%= link_to home_path, data: { turbo: false } do %>
+            <button class="btn-home-back" type="button">
               <%= image_tag 'back_arrow.svg' %>
               <span>Home</span>
             </button>
