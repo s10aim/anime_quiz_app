@@ -6,3 +6,6 @@ import { application } from './application'
 
 import TurboModalController from './turbo_modal_controller'
 application.register('turbo_modal', TurboModalController)
+
+import HamburgerController from './hamburger_controller'
+application.register('hamburger', HamburgerController)
