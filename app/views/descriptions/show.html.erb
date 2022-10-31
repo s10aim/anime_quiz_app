@@ -1,73 +1,95 @@
 <div class="container mt-3">
   <% if @package.category == "complete" %>
     <h1 class="main-title" data-en="ANIAQ">総合問題</h1>
-    <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
-      <p><%= f.input :category, as: :hidden, input_html: { value: params[:category] } %></p>
-      <div class="desc-content-box">
-        <span class="box-title">ルール説明</span>
-        <p>・総合問題では投稿された全クイズの中からランダムで問題が出題されます。</p>
-        <p>・問題は全10問です。</p>
-        <p>・スタートボタンを押すと問題がスタートします。</p>
-        <p>・最後のクイズに回答すると終了です。</p>
-        <p>・スタートしてから最後のクイズに回答するまでの所要時間を計測します。</p>
-        <p>・獲得したスコアから所要時間の秒数を引いたスコアをもとにランキングを計測します。</p>
-        <p>・よって、所要時間が短いほどスコア計算時に得点が高くなります。</p>
-        <p>・ランキングは総合問題に回答した人のみで計測します。</p>
-        <p>・スコアが同点の場合は先着順になります。</p>
-        <p class="mt-4">1位を目指して頑張ってください✨</p>
-      </div>
-      <div class="btn-group">
-        <div class="btn-main-group">
-          <%= f.button :submit, "スタート", class: "btn-start" %>
+    <div style="max-width: 960px; margin: 0 auto;">
+      <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
+        <p><%= f.input :category, as: :hidden, input_html: { value: params[:category] } %></p>
+        <div class="desc-content-box">
+          <span class="box-title">ルール説明</span>
+          <p>・総合問題では投稿された全クイズの中からランダムで問題が出題されます。</p>
+          <p>・問題は全10問です。</p>
+          <p>・スタートボタンを押すと問題がスタートします。</p>
+          <p>・最後のクイズに回答すると終了です。</p>
+          <p>・スタートしてから最後のクイズに回答するまでの所要時間を計測します。</p>
+          <p>・獲得したスコアから所要時間の秒数を引いたスコアをもとにランキングを計測します。</p>
+          <p>・よって、所要時間が短いほどスコア計算時に得点が高くなります。</p>
+          <p>・ランキングは総合問題に回答した人のみで計測します。</p>
+          <p>・スコアが同点の場合は先着順になります。</p>
+          <p class="mt-4">1位を目指して頑張ってください✨</p>
         </div>
-        <div class="btn-back">
-          <%= link_to home_path do %>
-            <button class="btn-home-back">
-              <%= image_tag 'back_arrow.svg' %>
-              <span>Home</span>
-            </button>
-          <% end %>
+        <div class="btn-group">
+          <div class="btn-main-group">
+            <%= f.button :submit, "スタート", class: "btn-start" %>
+          </div>
+          <div class="btn-back">
+            <% if user_signed_in? %>
+              <%= link_to home_path, data: { turbo: false } do %>
+                <button class="btn-home-back" type="button">
+                  <%= image_tag 'back_arrow.svg' %>
+                  <span>Home</span>
+                </button>
+              <% end %>
+            <% else %>
+              <%= link_to root_path, data: { turbo: false } do %>
+                <button class="btn-home-back" type="button">
+                  <%= image_tag 'back_arrow.svg' %>
+                  <span>Top</span>
+                </button>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <% end %>
   <% if @package.category == "selected" %>
     <h1 class="main-title" data-en="ANIAQ">アニメ選択問題</h1>
-    <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
-      <p>
-        <%= f.input :anime_id, as: :select,
+    <div style="max-width: 960px; margin: 0 auto;">
+      <%= simple_form_for @package, url: descriptions_path, method: :post do |f| %>
+        <p>
+          <%= f.input :anime_id, as: :select,
                                  collection: @select_animes_collection,
                                  prompt: '選択してください',
                                  label: "#{Anime.model_name.human}作品" %>
-      </p>
-      <p><%= f.input :category, as: :hidden, input_html: { value: "selected" } %></p>
-      <div class="desc-content-box mt-5">
-        <span class="box-title">ルール説明</span>
-        <p>・アニメ作品選択問題ではまず自身が挑戦したい作品を選択してください。</p>
-        <p>・選択した作品の中からランダムで問題が出題されます。</p>
-        <p>・問題は全10問です。</p>
-        <p>・スタートボタンを押すと問題がスタートします。</p>
-        <p>・最後のクイズに回答すると終了です。</p>
-        <p>・スタートしてから最後のクイズに回答するまでの所要時間を計測します。</p>
-        <p>・獲得したスコアから所要時間の秒数を引いたスコアをもとにランキングを計測します。</p>
-        <p>・よって、所要時間が短いほどスコア計算時に得点が高くなります。</p>
-        <p>・ランキングはその作品を選択して問題に回答した人のみで計測します。</p>
-        <p>・スコアが同点の場合は先着順になります。</p>
-        <p class="mt-4">1位を目指して頑張ってください✨</p>
-      </div>
-      <div class="btn-group">
-        <div class="btn-main-group">
-          <%= f.button :submit, "スタート", class: "btn-start" %>
+        </p>
+        <p><%= f.input :category, as: :hidden, input_html: { value: "selected" } %></p>
+        <div class="desc-content-box mt-5">
+          <span class="box-title">ルール説明</span>
+          <p>・アニメ作品選択問題ではまず自身が挑戦したい作品を選択してください。</p>
+          <p>・選択した作品の中からランダムで問題が出題されます。</p>
+          <p>・問題は全10問です。</p>
+          <p>・スタートボタンを押すと問題がスタートします。</p>
+          <p>・最後のクイズに回答すると終了です。</p>
+          <p>・スタートしてから最後のクイズに回答するまでの所要時間を計測します。</p>
+          <p>・獲得したスコアから所要時間の秒数を引いたスコアをもとにランキングを計測します。</p>
+          <p>・よって、所要時間が短いほどスコア計算時に得点が高くなります。</p>
+          <p>・ランキングはその作品を選択して問題に回答した人のみで計測します。</p>
+          <p>・スコアが同点の場合は先着順になります。</p>
+          <p class="mt-4">1位を目指して頑張ってください✨</p>
         </div>
-        <div>
-          <%= link_to home_path do %>
-            <button class="btn-home-back">
-              <%= image_tag 'back_arrow.svg' %>
-              <span>Home</span>
-            </button>
-          <% end %>
+        <div class="btn-group">
+          <div class="btn-main-group">
+            <%= f.button :submit, "スタート", class: "btn-start" %>
+          </div>
+          <div class="btn-back">
+            <% if user_signed_in? %>
+              <%= link_to home_path, data: { turbo: false } do %>
+                <button class="btn-home-back" type="button">
+                  <%= image_tag 'back_arrow.svg' %>
+                  <span>Home</span>
+                </button>
+              <% end %>
+            <% else %>
+              <%= link_to root_path, data: { turbo: false } do %>
+                <button class="btn-home-back" type="button">
+                  <%= image_tag 'back_arrow.svg' %>
+                  <span>Top</span>
+                </button>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>

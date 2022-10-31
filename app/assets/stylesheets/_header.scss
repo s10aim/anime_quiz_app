@@ -158,6 +158,8 @@
   z-index: 80;
   background-color: #fff;
   transition: all 0.5s;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #menu-btn-check:checked ~ .menu-content {

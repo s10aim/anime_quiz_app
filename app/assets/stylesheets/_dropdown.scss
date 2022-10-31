@@ -15,6 +15,12 @@
   text-decoration: none;
 }
 
+.header-dropdown {
+  .btn-link:hover {
+    color: #db5876;
+  }
+}
+
 .dropdown-menu a.nav-link {
   padding: 4px 16px;
   margin: 0;

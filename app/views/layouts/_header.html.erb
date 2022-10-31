@@ -8,6 +8,20 @@
         <% end %>
       <% end %>
       <li class="nav-item me-4">
+        <% unless user_signed_in? %>
+          <div class="dropdown header-dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Quiz
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+              <li><%= link_to "総合クイズ", descriptions_path(category: "complete"), class: 'nav-link active' %></li>
+              <li><%= link_to "作品別クイズ", descriptions_path(category: "selected"), class: 'nav-link active' %></li>
+              <li><%= link_to "ランキング", rankings_path, class: 'nav-link active' %></li>
+            </ul>
+          </div>
+        <% end %>
+      </li>
+      <li class="nav-item me-4">
         <% if user_signed_in? %>
           <div class="dropdown header-dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,65 +48,64 @@
               <li><%= button_to "ログアウト", destroy_user_session_path, class: 'nav-link active', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } %></li>
             </ul>
           </div>
-        </ul>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: 'nav-link active header-btn header-btn-pink' %>
-      <% end %>
-    </li>
-  </ul>
-</div>
-<div class="hamburger-menu d-md-none">
-  <input type="checkbox" id="menu-btn-check">
-  <div class="d-flex align-items-center">
-    <% if user_signed_in? %>
-      <%= link_to home_path do %>
-        <div class="mobile-home-icon"><i class="bi bi-house-fill"></i></div>
-      <% end %>
-    <% end %>
-    <label for="menu-btn-check" class="menu-btn"><span></span></label>
-  </div>
-  <div class="menu-content">
-    <div class="menu-content-card">
-      <div class="card mb-3">
-        <%= link_to descriptions_path(category: "complete"), class: 'card-body' do %>
-          <%= image_tag 'complete-anime.png', size: '35x35' %>
-          総合問題で遊ぶ
-        <% end %>
-      </div>
-      <div class="card">
-        <%= link_to descriptions_path(category: "selected"), class: 'card-body' do %>
-          <%= image_tag 'specific-anime.png', size: '35x35' %>
-          作品を選択して遊ぶ
-        <% end %>
-      </div>
-    </div>
-    <ul>
-      <li class="nav-item">
-        <% if user_signed_in? %>
-          <%= link_to home_path, class: 'nav-link active' do %>
-            <i class="bi bi-house me-2"></i>ホーム
-          <% end %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <% if user_signed_in? %>
-          <%= link_to edit_user_registration_path, class: 'nav-link active' do %>
-            <i class="bi bi-person me-2"></i>アカウント編集
-          <% end %>
         <% else %>
-          <%= link_to "新規登録", new_user_registration_path, class: 'nav-link active' %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <% if user_signed_in? %>
-          <%= button_to destroy_user_session_path, class: 'nav-link active logout-hamburger', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } do %>
-            <i class="bi bi-box-arrow-in-left me-2"></i>ログアウト
-          <% end %>
-        <% else %>
-          <%= link_to "ログイン", new_user_session_path, class: 'nav-link active' %>
+          <%= link_to "ログイン", new_user_session_path, class: 'nav-link active header-btn header-btn-pink' %>
         <% end %>
       </li>
     </ul>
   </div>
-</div>
+  <div class="hamburger-menu d-md-none" data-controller="hamburger">
+    <input type="checkbox" id="menu-btn-check" data-action="click->hamburger#toggle">
+    <div class="d-flex align-items-center">
+      <% if user_signed_in? %>
+        <%= link_to home_path do %>
+          <div class="mobile-home-icon"><i class="bi bi-house-fill"></i></div>
+        <% end %>
+      <% end %>
+      <label for="menu-btn-check" class="menu-btn"><span></span></label>
+    </div>
+    <div class="menu-content">
+      <div class="menu-content-card">
+        <div class="card mb-3">
+          <%= link_to descriptions_path(category: "complete"), class: 'card-body' do %>
+            <%= image_tag 'complete-anime.png', size: '35x35' %>
+            総合問題で遊ぶ
+          <% end %>
+        </div>
+        <div class="card">
+          <%= link_to descriptions_path(category: "selected"), class: 'card-body' do %>
+            <%= image_tag 'specific-anime.png', size: '35x35' %>
+            作品を選択して遊ぶ
+          <% end %>
+        </div>
+      </div>
+      <ul>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to home_path, class: 'nav-link active' do %>
+              <i class="bi bi-house me-2"></i>ホーム
+            <% end %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= link_to edit_user_registration_path, class: 'nav-link active' do %>
+              <i class="bi bi-person me-2"></i>アカウント編集
+            <% end %>
+          <% else %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link active' %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <% if user_signed_in? %>
+            <%= button_to destroy_user_session_path, class: 'nav-link active logout-hamburger', method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } do %>
+              <i class="bi bi-box-arrow-in-left me-2"></i>ログアウト
+            <% end %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link active' %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
