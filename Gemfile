@@ -42,6 +42,7 @@ gem 'bootsnap', require: false
 gem 'bootstrap5-kaminari-views'
 gem 'devise'
 gem 'devise-i18n'
+gem 'dotenv-rails'
 gem 'enum_help'
 gem 'kaminari'
 gem 'rails-i18n'
