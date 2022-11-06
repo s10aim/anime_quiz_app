@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  db:
+    container_name: db
+    image: postgres:alpine
+    env_file: &env_file
+      - ./.env
+      - ./.env.production
+    volumes:
+      - db_vol:/var/lib/postgresql/data
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./docker/production/app/Dockerfile
+    env_file: *env_file
+    volumes:
+      - bundler_vol:/usr/local/bundle
+      - node_module_vol:/work/node-modules
+      - public_vol:/work/public
+      - tmp_vol:/work/tmp
+    depends_on:
+      - db
+  web:
+    container_name: web
+    image: nginx:alpine
+    env_file: *env_file
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/production/web/templates:/etc/nginx/templates
+      - public_vol:/var/www/work/public
+    depends_on:
+      - app
+volumes:
+  db_vol:
+  bundler_vol:
+  node_module_vol:
+  public_vol:
+  tmp_vol:
