@@ -1,14 +1,9 @@
 ARG RUBY_VERSION=3.1.2
-ARG NODE_VERSION=14.18.3
+ARG NODE_VERSION=18
 
 # 最終的なイメージサイズを小さくするため、マルチステージビルドを利用
 FROM node:${NODE_VERSION}-alpine AS node
 FROM ruby:${RUBY_VERSION}-alpine AS ruby
-
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /opt/yarn-* /opt/yarn
-RUN ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
 
 RUN apk update -qq && \
   apk add \
@@ -18,7 +13,7 @@ RUN apk update -qq && \
   gcompat
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && yarn install
+RUN bundle install
 
 # 最終的なイメージを構築
 FROM ruby:${RUBY_VERSION}-alpine
@@ -28,6 +23,11 @@ ENV APP_HOME=/work \
   TZ=Asia/Tokyo \
   RAILS_ENV=production \
   RAILS_LOG_TO_STDOUT=TRUE
+
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /opt/yarn-* /opt/yarn
+RUN ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
 
 RUN apk update -qq && \
   apk add --no-cache \
