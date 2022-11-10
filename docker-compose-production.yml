@@ -27,11 +27,24 @@ services:
     env_file: *env_file
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./docker/production/web/templates:/etc/nginx/templates
       - public_vol:/var/www/work/public
+      - /etc/nginx/ssl:/etc/nginx/ssl
+      - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - app
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    depends_on:
+      - web
+    volumes:
+      - public_vol:/var/www/work
+      - /etc/nginx/ssl:/etc/nginx/ssl
+      - /etc/letsencrypt:/etc/letsencrypt
+    command: ["--version"]
 volumes:
   db_vol:
   bundler_vol:
