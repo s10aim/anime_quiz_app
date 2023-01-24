@@ -17,16 +17,20 @@
       <div class="complete-wrapper p-4">
         <p style="color: #a1aab3;">総合問題</p>
         <p class="py-2">
-          <%= Package.complete_best_ranking(current_user) %>位
-          <span class="ms-3"><%= @my_best_score_of_complete.ranking_score %>点</span>
+          <%= Package.complete_best_ranking(current_user) || "ーーー" %>位
+          <% unless Package.complete_best_ranking(current_user).nil? %>
+            <span class="ms-3"><%= @my_best_score_of_complete.ranking_score %>点</span>
+          <% end %>
         </p>
       </div>
       <div class="selected-wrapper p-4 pt-0">
         <p style="color: #a1aab3;">アニメ選択問題</p>
         <p class="py-2">
-          <%= Package.selected_best_ranking(current_user) %>位
-          <span class="ms-3"><%= @my_best_score_of_selected.ranking_score %>点</span>
-          <span class="my-ranking-anime-title"><%= @my_best_score_of_selected.anime.title %></span>
+          <%= Package.selected_best_ranking(current_user) || "ーーー" %>位
+          <% unless Package.selected_best_ranking(current_user).nil? %>
+            <span class="ms-3"><%= @my_best_score_of_selected.ranking_score %>点</span>
+            <span class="my-ranking-anime-title"><%= @my_best_score_of_selected.anime.title %></span>
+          <% end %>
         </p>
       </div>
     </div>
